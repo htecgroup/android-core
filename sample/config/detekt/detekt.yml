@@ -1,0 +1,43 @@
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+  weights:
+  # complexity: 2
+  # LongParameterList: 1
+  # style: 1
+  # comments: 1
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
+
+formatting:
+  active: true
+  android: false
+  autoCorrect: true
+  NoWildcardImports:
+    active: false
+
+complexity:
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 15
+    thresholdInClasses: 15
+    thresholdInInterfaces: 15
+    thresholdInObjects: 15
+    thresholdInEnums: 15
+    ignoreDeprecated: false
+    ignorePrivate: false
+    ignoreOverridden: false
+  LongParameterList:
+    ignoreDefaultParameters: true
+
+style:
+  UnnecessaryAbstractClass:
+    excludes: [ "**/DataModule.kt", "**/CrashlyticsModule.kt" ]
+  WildcardImport:
+    excludes: [ "**/PostDao.kt", "**/UserDao.kt", "**/EditPostViewModelTest.kt" ]
+  MagicNumber:
+    excludes: [ "**/Color.kt" ]
+  UnusedPrivateMember:
+    ignoreAnnotated: [ 'Preview' ]
