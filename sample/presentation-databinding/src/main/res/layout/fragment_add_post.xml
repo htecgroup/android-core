@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2023 HTEC Group Inc.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<import type="android.view.View" />
+
+		<variable
+			name="vm"
+			type="com.htecgroup.coresample.presentation.post.add.AddPostViewModel" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".presentation.post.add.AddPostActivity">
+
+		<include
+			android:id="@+id/appBar"
+			layout="@layout/toolbar_centered"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<EditText
+			android:id="@+id/edit_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/margin_default"
+			android:layout_marginEnd="@dimen/margin_default"
+			android:layout_marginBottom="8dp"
+			android:hint="@string/add_title"
+			android:inputType="text"
+			android:text="@={vm.titleLive}"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/appBar"
+			app:layout_constraintVertical_bias="0.3"
+			tools:ignore="Autofill,LabelFor" />
+
+		<EditText
+			android:id="@+id/edit_body"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/margin_default"
+			android:layout_marginTop="@dimen/margin_default"
+			android:layout_marginEnd="@dimen/margin_default"
+			android:hint="@string/add_body"
+			android:inputType="textMultiLine"
+			android:maxLines="10"
+			android:text="@={vm.bodyLive}"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/edit_title"
+			tools:ignore="Autofill,LabelFor" />
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/margin_default"
+			android:onClick="@{() -> vm.onSaveClick()}"
+			android:text="@string/save"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/edit_body"
+			app:visibility="@{vm.bodyLive.length() > 0}" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

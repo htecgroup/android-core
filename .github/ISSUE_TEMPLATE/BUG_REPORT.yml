@@ -1,0 +1,42 @@
+name: "Bug Report"
+description: Create a new ticket for a bug.
+title: "[BUG] - <title>"
+labels: [ "bug" ]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: Please enter an explicit description of your issue.
+      placeholder: Detailed and explicit description of your incident, including steps to reproduce...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Logs"
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: bash
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version of the Core library are you using?
+  - type: dropdown
+    id: module
+    attributes:
+      label: Module
+      description: Which modules of the Core library are you using?
+      multiple: true
+      options:
+        - Domain
+        - Data
+        - Presentation
+        - Presentation-databinding
+        - Test
+  - type: input
+    id: os
+    attributes:
+      label: "Android API version"
+      description: What is the impacted environment?
+      placeholder: API 31
