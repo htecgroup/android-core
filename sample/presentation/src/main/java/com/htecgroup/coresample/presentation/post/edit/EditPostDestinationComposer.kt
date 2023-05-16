@@ -16,10 +16,14 @@
 
 package com.htecgroup.coresample.presentation.post.edit
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.navigation.NavHostController
 import com.htecgroup.core.presentation.compose.AnimateSlide
 import com.htecgroup.core.presentation.compose.BarButton
+import com.htecgroup.core.presentation.compose.DefaultTopBar
 import com.htecgroup.core.presentation.compose.composer.DestinationComposer
 import com.htecgroup.core.presentation.compose.navigation.CommonNavigationAction.Back
 import com.htecgroup.core.presentation.compose.navigation.CommonNavigationAction.Up
@@ -33,9 +37,21 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class EditPostDestinationComposer @Inject constructor() : DestinationComposer<EditPostViewModel>() {
 
-    override val titleResId = R.string.title_edit_post
+    override val topBarVisible = true
     override val destination: Destination = PostsDestinations.EDIT_POST_SCREEN
     override val viewModelClass: Class<EditPostViewModel> = EditPostViewModel::class.java
+    private val titleResId = R.string.title_edit_post
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    override fun TopBarContent(upButton: State<BarButton?>, contextButton: State<BarButton?>) {
+        DefaultTopBar(
+            titleResId = titleResId,
+            topAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+            upButton = upButton,
+            contextButton = contextButton
+        )
+    }
 
     @Composable
     override fun Content(navController: NavHostController, viewModel: EditPostViewModel) {

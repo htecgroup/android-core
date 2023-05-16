@@ -38,9 +38,10 @@ import javax.inject.Inject
 @ActivityRetainedScoped
 class PostListDestinationComposer @Inject constructor() : DestinationComposer<PostsViewModel>() {
 
-    override val titleResId = R.string.title_posts_list
+    override val topBarVisible = true
     override val destination: Destination = PostsDestinations.POSTS_SCREEN
     override val viewModelClass: Class<PostsViewModel> = PostsViewModel::class.java
+    private val titleResId = R.string.title_posts_list
 
     @Composable
     override fun Content(navController: NavHostController, viewModel: PostsViewModel) {
@@ -58,7 +59,6 @@ class PostListDestinationComposer @Inject constructor() : DestinationComposer<Po
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun TopBarContent(
-        titleResId: Int,
         upButton: State<BarButton?>,
         contextButton: State<BarButton?>
     ) {

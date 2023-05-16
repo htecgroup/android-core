@@ -17,29 +17,22 @@
 package com.htecgroup.core.presentation.compose.composer
 
 import android.os.Bundle
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.htecgroup.core.extension.coreViewModel
 import com.htecgroup.core.presentation.compose.AnimateFade
 import com.htecgroup.core.presentation.compose.BarButton
-import com.htecgroup.core.presentation.compose.DefaultTopBar
 import com.htecgroup.core.presentation.compose.navigation.Destination
 
 /**
  * Defines Compose UI and elements for a screen.
  */
 abstract class DestinationComposer<ViewModelT : ViewModel> {
-
-    abstract val titleResId: Int
 
     abstract val destination: Destination
 
@@ -49,10 +42,10 @@ abstract class DestinationComposer<ViewModelT : ViewModel> {
     /** Sets value to specify context button icon and behaviour action. */
     protected val contextButton: MutableState<BarButton?> = mutableStateOf(null)
 
-    /** Sets value to specify bottom bar button icons and behaviour actions. */
-    protected val bottomBarButtons: SnapshotStateList<BarButton.ScreenButton> = mutableStateListOf()
-
     abstract val viewModelClass: Class<ViewModelT>
+
+    /** Sets the visibility of the top bar **/
+    abstract val topBarVisible: Boolean
 
     /**
      * Override to specify a [Composable] content for this screen.
@@ -65,25 +58,23 @@ abstract class DestinationComposer<ViewModelT : ViewModel> {
     @Composable
     protected abstract fun Content(navController: NavHostController, viewModel: ViewModelT)
 
-    @OptIn(ExperimentalMaterial3Api::class)
+    /**
+     * Override to specify [Composable] content for the top app bar
+     * @param upButton the up or back button (start aligned)
+     * @param contextButton the context button (end aligned)
+     */
     @Composable
-    open fun TopBarContent(
-        titleResId: Int,
+    abstract fun TopBarContent(
         upButton: State<BarButton?>,
         contextButton: State<BarButton?>
-    ) {
-        DefaultTopBar(
-            titleResId = titleResId,
-            topAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
-            upButton = upButton,
-            contextButton = contextButton
-        )
-    }
+    )
 
     @Composable
     fun TopBar(navController: NavHostController) {
-        AnimateFade(navController.isScreenVisible) {
-            TopBarContent(titleResId, upButton = upButton, contextButton = contextButton)
+        if (topBarVisible) {
+            AnimateFade(navController.isScreenVisible) {
+                TopBarContent(upButton = upButton, contextButton = contextButton)
+            }
         }
     }
 

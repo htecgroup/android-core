@@ -67,10 +67,35 @@ fun AnimateFade(
     )
 }
 
+@Suppress("LongParameterList")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DefaultTopBar(
     titleResId: Int,
+    topAppBarColors: TopAppBarColors,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Start,
+    titleTextStyle: TextStyle = MaterialTheme.typography.titleLarge,
+    upButton: State<BarButton?>? = null,
+    contextButton: State<BarButton?>? = null
+) {
+    DefaultTopBar(
+        title = stringResource(id = titleResId),
+        topAppBarColors = topAppBarColors,
+        modifier = modifier,
+        textAlign = textAlign,
+        titleTextStyle = titleTextStyle,
+        upButton = upButton,
+        contextButton = contextButton
+    )
+}
+
+
+@Suppress("LongParameterList")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DefaultTopBar(
+    title: String,
     topAppBarColors: TopAppBarColors,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Start,
@@ -95,7 +120,7 @@ fun DefaultTopBar(
         title = {
             Text(
                 modifier = modifier.then(Modifier.fillMaxWidth()),
-                text = stringResource(titleResId),
+                text = title,
                 textAlign = textAlign,
                 style = titleTextStyle,
                 fontWeight = FontWeight.Medium
