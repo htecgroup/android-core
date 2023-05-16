@@ -57,7 +57,7 @@ tasks.wrapper {
 
 tasks.withType<KotlinCompile>().all {
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = Config.Bom.javaVersion.toString()
     }
 }
 
@@ -75,7 +75,6 @@ tasks.dokkaHtmlMultiModule {
 // Get version from config and set GitHub Action output
 tasks.register("setVersionOutput") {
     println("::set-output name=BOM_VERSION::${Config.Bom.version}")
-//    println("echo \"BOM_VERSION=${Config.Bom.version}\" >> \$GITHUB_OUTPUT")
 }
 
 tasks {

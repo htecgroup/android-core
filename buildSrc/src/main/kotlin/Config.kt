@@ -28,7 +28,7 @@ object Config {
         val debug = "debug"
         val detekt = "../detekt.gradle"
         override val group = "com.htecgroup.core"
-        val javaVersion = JavaVersion.VERSION_11
+        val javaVersion = JavaVersion.VERSION_17
         abstract val moduleName: String
         override val version: String get() = VersionProperties(this).version
     }

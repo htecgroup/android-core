@@ -58,7 +58,7 @@ tasks.wrapper {
 
 tasks.withType<KotlinCompile>().all {
 	kotlinOptions {
-		jvmTarget = JavaVersion.VERSION_11.toString()
+		jvmTarget = Config.CoreSample.javaVersion.toString()
 	}
 }
 
