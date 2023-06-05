@@ -22,7 +22,7 @@ import com.htecgroup.coresample.presentation.post.PostsDestinations
 
 data class PostDetailsRoutes(val id: Int) : ToDestination(
     PostsDestinations.EDIT_POST_SCREEN,
-    listOf(id),
+    listOf(id.toString()),
     {
         // Note: this is just an example to showcase that it's possible to pop a destination from the backstack
         // Since it pops to itself, it doesn't do much

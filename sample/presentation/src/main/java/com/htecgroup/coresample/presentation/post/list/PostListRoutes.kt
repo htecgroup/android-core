@@ -21,5 +21,5 @@ import com.htecgroup.coresample.presentation.post.PostsDestinations
 
 data class PostListRoutes(val id: Int) : ToDestination(
     PostsDestinations.POST_DETAILS_SCREEN,
-    listOf(id)
+    listOf(id.toString())
 )

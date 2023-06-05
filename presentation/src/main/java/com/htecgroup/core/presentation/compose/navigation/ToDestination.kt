@@ -24,7 +24,7 @@ import com.htecgroup.core.presentation.compose.navigation.Action.NavigationActio
  */
 abstract class ToDestination(
     val destination: Destination,
-    val args: List<Int>? = null,
+    val args: List<String>? = null,
     val navOptions: NavOptionsBuilder.() -> Unit = {}
 ) : NavigationAction
 

@@ -58,7 +58,7 @@ val Destination.routeArgsFormat: String
  * Validates [routeArgs] and returns formatted destination path.
  */
 @Suppress("SpreadOperator")
-fun Destination.routeArgs(args: List<Int>): String {
+fun Destination.routeArgs(args: List<String>): String {
     if (args.isEmpty()) return ""
     require(args.size == (this.args?.size ?: 0)) { "Illegal arg size" }
     return String.format(routeArgsFormat, *args.toTypedArray())
@@ -72,4 +72,14 @@ fun intArg(argName: String) =
         type = NavType.IntType
         nullable = false
         defaultValue = 0
+    }
+
+/**
+ * Helper function for creating default [NavType.StringType] named argument named [argName].
+ */
+fun stringArg(argName: String) =
+    navArgument(argName) {
+        type = NavType.StringType
+        nullable = false
+        defaultValue = ""
     }
