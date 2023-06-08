@@ -16,10 +16,10 @@ jobs:
       BOM_VERSION_SUFFIX: -SNAPSHOT
     steps:
       - name: Setup java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: 17
-          distribution: temurin
+          distribution: zulu
 
       - name: Code checkout
         uses: actions/checkout@v3
