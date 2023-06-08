@@ -1,7 +1,7 @@
 name: Release
 on:
   pull_request:
-    types: [closed]
+    types: [ closed ]
     branches:
       - main
     paths-ignore:
@@ -12,9 +12,15 @@ jobs:
     if: startsWith(github.event.pull_request.head.ref, 'bump-') && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - name: Setup java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: temurin
+
       - name: Code checkout
         uses: actions/checkout@v3
-        with: 
+        with:
           fetch-depth: 0
 
       - name: Code style check
@@ -29,8 +35,8 @@ jobs:
 
       - name: Set the latest tag
         id: set_latest_tag
-        run:  echo ::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)
-#        run:  echo "LATEST_TAG=$(git describe --abbrev=0 --tags)" >> $GITHUB_OUTPUT
+        run: echo ::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)
+      #        run:  echo "LATEST_TAG=$(git describe --abbrev=0 --tags)" >> $GITHUB_OUTPUT
 
       - name: Update older docs
         run: |
@@ -82,7 +88,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Append to CHANGELOG.md and commit changelog and docs
-        run: |      
+        run: |
           repoUrl="https://github.com/${{ github.repository }}"
           current_version=${{ steps.set_version_output.outputs.BOM_VERSION }}
           echo -e "## Release [$current_version]($repoUrl/releases/tag/$current_version)\n\n${{ steps.build_changelog.outputs.changelog }}" | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md

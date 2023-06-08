@@ -2,7 +2,7 @@ name: Snapshot
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [ opened, synchronize ]
     branches:
       - main
     paths-ignore:
@@ -15,6 +15,12 @@ jobs:
     env:
       BOM_VERSION_SUFFIX: -SNAPSHOT
     steps:
+      - name: Setup java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: temurin
+
       - name: Code checkout
         uses: actions/checkout@v3
 
