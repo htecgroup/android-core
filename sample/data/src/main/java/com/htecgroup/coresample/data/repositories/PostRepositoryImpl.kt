@@ -17,7 +17,7 @@
 package com.htecgroup.coresample.data.repositories
 
 import com.htecgroup.androidcore.data.CoreRepository
-import com.htecgroup.androidcore.domain.extension.applyIfSome
+import com.htecgroup.androidcore.domain.extension.flatMapIfSome
 import com.htecgroup.androidcore.domain.extension.mapWrapListResult
 import com.htecgroup.androidcore.domain.extension.mapWrapResult
 import com.htecgroup.androidcore.domain.extension.toUnitResult
@@ -62,18 +62,18 @@ class PostRepositoryImpl @Inject constructor(
             postApi.getPosts()
         }
             .map { posts -> posts.map { it.toPostEntity() } }
-            .applyIfSome { safeDbCall { postDao.updatePosts(it) } }
+            .flatMapIfSome { safeDbCall { postDao.updatePosts(it) } }
             .toUnitResult()
 
     override suspend fun fetchPost(postId: Int): Result<Unit> =
         safeApiCall { postApi.getPost(postId) }
             .map { it.toPostEntity() }
-            .applyIfSome { safeDbCall { postDao.insert(it) } }
+            .flatMapIfSome { safeDbCall { postDao.insert(it) } }
             .toUnitResult()
 
     override suspend fun addPost(post: Post): Result<Unit> =
         safeApiCall { postApi.addPost(post.toPostRaw()) }
             .map { postRaw -> postRaw.toPostEntity() }
-            .applyIfSome { safeDbCall { postDao.insert(it) } }
+            .flatMapIfSome { safeDbCall { postDao.insert(it) } }
             .toUnitResult()
 }
