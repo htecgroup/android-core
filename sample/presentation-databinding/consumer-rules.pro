@@ -1,0 +1,1 @@
+-keep class com.htecgroup.coresample.presentation.post.PostView

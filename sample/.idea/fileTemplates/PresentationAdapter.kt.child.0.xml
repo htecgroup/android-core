@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+	<data>
+
+		<variable
+			name="vm"
+			type="${PACKAGE_NAME}.${ENTITY}ItemViewModel" />
+	</data>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:onClick="@{() -> vm.onItemClick()}"
+		android:orientation="vertical">
+
+	</LinearLayout>
+
+</layout>
