@@ -1,0 +1,5 @@
+-dontwarn org.bouncycastle.jsse.**
+-dontwarn org.conscrypt.*
+-dontwarn org.openjsse.javax.net.ssl.*
+-dontwarn org.openjsse.net.ssl.*
+-dontwarn java.lang.invoke.*

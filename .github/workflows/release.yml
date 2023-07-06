@@ -1,0 +1,131 @@
+name: Release
+on:
+  pull_request:
+    types: [ closed ]
+    branches:
+      - main
+    paths-ignore:
+      - 'sample/**'
+
+jobs:
+  release:
+    if: startsWith(github.event.pull_request.head.ref, 'bump-') && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
+      SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+      SIGNING_SECRET_KEY_RING_FILE: '../signing/SecretRingKey.gpg'
+      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
+    steps:
+      - name: Setup java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+
+      - name: Code checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Code style check
+        run: ./gradlew detekt
+
+      - name: Set version output
+        id: set_version_output
+        run: ./gradlew setVersionOutput
+
+      - name: Print version
+        run: echo ${{ steps.set_version_output.outputs.BOM_VERSION }}
+
+      - name: Set the latest tag
+        id: set_latest_tag
+        run: echo ::set-output name=LATEST_TAG::$(git describe --abbrev=0 --tags)
+      #        run:  echo "LATEST_TAG=$(git describe --abbrev=0 --tags)" >> $GITHUB_OUTPUT
+
+      - name: Update older docs
+        run: |
+          if [ -d docs ]; then
+            mkdir -p docs/older
+            sudo apt-get install jq -y
+            currentDocVersion=$(cat docs/version.json| jq '.version' | sed 's/"//g')
+            rsync -av --progress --exclude='older' docs/ docs/older/$currentDocVersion
+          fi
+
+      - name: Generate documentation
+        run: ./gradlew dokkaHtmlMultiModule
+
+      - name: Update documentation dir
+        run: |
+          rm -rf docs
+          mv build/dokka/htmlMultiModule docs
+
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          toTag: ${{ github.sha }}
+          fromTag: ${{ steps.set_latest_tag.outputs.LATEST_TAG }}
+          configurationJson: |
+            {
+              "template": "#{{CHANGELOG}}\n\n#{{UNCATEGORIZED}}",
+              "pr_template": "- #{{TITLE}} by @#{{AUTHOR}} in [##{{NUMBER}}](https://github.com/${{ github.repository }}/pull/#{{NUMBER}})",
+              "categories": [
+                {
+                    "title": "## Features",
+                    "labels": ["feature"]
+                },
+                {
+                    "title": "## Fixes",
+                    "labels": ["fix", "bug"]
+                },
+                {
+                    "title": "## Dependencies",
+                    "labels": ["dependencies"]
+                },
+                {
+                    "title": "## Other",
+                    "labels": ["other"]
+                }
+              ]
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Append to CHANGELOG.md and commit changelog and docs
+        run: |
+          repoUrl="https://github.com/${{ github.repository }}"
+          current_version=${{ steps.set_version_output.outputs.BOM_VERSION }}
+          echo -e "## Release [$current_version]($repoUrl/releases/tag/$current_version)\n\n${{ steps.build_changelog.outputs.changelog }}" | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update CHANGELOG.md and docs"
+          git tag -a $current_version -m "Version $current_version"
+          git push
+          git push --tags
+
+      - name: Generate secret key
+        run: |
+          mkdir ./signing
+          echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ./signing/SecretRingKey.gpg
+
+      - name: Build release assets
+        run: ./gradlew assembleRelease
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.set_version_output.outputs.BOM_VERSION }}
+          files: |
+            data/build/outputs/aar/data-release.aar
+            domain/build/libs/domain.jar
+            presentation/build/outputs/aar/presentation-release.aar
+            presentation-databinding/build/outputs/aar/presentation-databinding-release.aar
+            test/build/outputs/aar/test-release.aar
+          body: ${{steps.build_changelog.outputs.changelog}}
+
+      - name: Publish release
+        run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
