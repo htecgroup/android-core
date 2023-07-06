@@ -78,6 +78,12 @@ private fun Project.publication(componentName: String, config: MavenPublishingCo
                                         from(sourceSet)
                                     }
                                 )
+                                artifact(
+                                    project.task<Jar>("javadocJar"){
+                                        archiveClassifier.set("javadoc")
+                                        from(tasks.getByName("dokkaJavadoc").outputs)
+                                    }
+                                )
                             }
                         }
 
