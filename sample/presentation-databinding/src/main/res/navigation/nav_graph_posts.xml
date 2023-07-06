@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2023 HTEC Group Inc.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/nav_graph_posts"
+	app:startDestination="@id/postsFragment">
+
+	<fragment
+		android:id="@+id/postsFragment"
+		android:name="com.htecgroup.coresample.presentation.post.list.PostsFragment"
+		android:label="PostsFragment"
+		tools:layout="@layout/fragment_posts">
+		<action
+			android:id="@+id/action_postsFragment_to_addPostFragment"
+			app:destination="@id/addPostFragment"
+			app:popUpTo="@id/postsFragment" />
+		<action
+			android:id="@+id/action_postsFragment_to_postDetailsFragment"
+			app:destination="@id/postDetailsFragment"
+			app:popUpTo="@id/postsFragment">
+			<argument
+				android:name="postView"
+				app:argType="com.htecgroup.coresample.presentation.post.PostView"
+				app:nullable="false" />
+		</action>
+	</fragment>
+
+	<fragment
+		android:id="@+id/addPostFragment"
+		android:name="com.htecgroup.coresample.presentation.post.add.AddPostFragment"
+		android:label="AddPostFragment"
+		tools:layout="@layout/fragment_add_post" />
+
+	<fragment
+		android:id="@+id/postDetailsFragment"
+		android:name="com.htecgroup.coresample.presentation.post.single.PostDetailsFragment"
+		android:label="PostDetailsFragment"
+		tools:layout="@layout/fragment_post_details">
+		<argument
+			android:name="postView"
+			app:argType="com.htecgroup.coresample.presentation.post.PostView"
+			app:nullable="false" />
+		<action
+			android:id="@+id/action_postDetailsFragment_to_editPostFragment"
+			app:destination="@id/editPostFragment">
+			<argument
+				android:name="postView"
+				app:argType="com.htecgroup.coresample.presentation.post.PostView"
+				app:nullable="false" />
+		</action>
+	</fragment>
+
+	<fragment
+		android:id="@+id/editPostFragment"
+		android:name="com.htecgroup.coresample.presentation.post.edit.EditPostFragment"
+		android:label="EditPostFragment"
+		tools:layout="@layout/fragment_edit_post">
+		<argument
+			android:name="postView"
+			app:argType="com.htecgroup.coresample.presentation.post.PostView"
+			app:nullable="false" />
+	</fragment>
+
+</navigation>

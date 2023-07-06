@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2023 HTEC Group Inc.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="vm"
+			type="com.htecgroup.coresample.presentation.post.single.PostViewModel" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include
+			android:id="@+id/appBar"
+			layout="@layout/toolbar_centered"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+			<ProgressBar
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center_horizontal"
+				app:visibility="@{vm.getStatus().isLoading()}" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/no_data"
+				app:visibility="@{vm.getStatus().noData()}"
+				tools:visibility="gone" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/no_internet"
+				app:visibility="@{vm.getStatus().noInternet()}"
+				tools:visibility="gone" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/error"
+				app:visibility="@{vm.getStatus().isError()}"
+				tools:visibility="gone" />
+
+			<androidx.core.widget.NestedScrollView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:visibility="@{vm.getStatus().hasData()}"
+				tools:visibility="gone">
+
+				<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+
+					<TextView
+						android:id="@+id/txt_id"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="32dp"
+						android:layout_marginEnd="8dp"
+						android:gravity="center"
+						android:text="@{String.valueOf(safeUnbox(vm.postLive.id))}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent"
+						tools:text="TextView" />
+
+					<TextView
+						android:id="@+id/txt_title"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="32dp"
+						android:layout_marginEnd="8dp"
+						android:gravity="center"
+						android:text="@{vm.postLive.title}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/txt_id"
+						tools:text="TextView" />
+
+					<TextView
+						android:id="@+id/txt_body"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="32dp"
+						android:layout_marginEnd="8dp"
+						android:gravity="center"
+						android:text="@{vm.postLive.description}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/txt_title"
+						tools:text="TextView" />
+
+					<TextView
+						android:id="@+id/txt_author"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="32dp"
+						android:layout_marginEnd="8dp"
+						android:gravity="center"
+						android:text="@{vm.postLive.user.name ?? `author`}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/txt_body"
+						tools:text="Author (email)" />
+
+					<TextView
+						android:id="@+id/txt_author_email"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginEnd="8dp"
+						android:gravity="center"
+						android:text="@{`(` + (vm.postLive.user.email ?? `email`) + `)`}"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/txt_author"
+						tools:text="Author (email)" />
+
+					<Button
+						android:id="@+id/button"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="48dp"
+						android:layout_marginEnd="8dp"
+						android:onClick="@{() -> vm.onEditPostClick()}"
+						android:text="@string/edit_post"
+						android:textAllCaps="false"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/txt_author_email" />
+
+					<Button
+						android:id="@+id/button2"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="16dp"
+						android:layout_marginEnd="8dp"
+						android:onClick="@{() -> vm.onDeletePostClick()}"
+						android:text="@string/delete_post"
+						android:textAllCaps="false"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/button" />
+
+					<com.google.android.gms.ads.nativead.NativeAdView
+						android:id="@+id/ad_view"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:background="@android:color/white"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/button2">
+
+						<androidx.constraintlayout.widget.ConstraintLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content">
+
+							<ImageView
+								android:id="@+id/img_badge"
+								android:layout_width="15dp"
+								android:layout_height="15dp"
+								android:src="@drawable/ic_ad_badge"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toTopOf="parent"
+								tools:ignore="ContentDescription" />
+
+							<TextView
+								android:id="@+id/txt_ad_headline"
+								android:layout_width="0dp"
+								android:layout_height="wrap_content"
+								android:ellipsize="end"
+								android:maxLines="1"
+								android:textSize="16sp"
+								app:layout_constraintEnd_toEndOf="parent"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@+id/img_badge"
+								tools:text="Headline (required)" />
+
+							<TextView
+								android:id="@+id/txt_ad_body"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="12dp"
+								android:textSize="16sp"
+								app:layout_constraintTop_toBottomOf="@+id/txt_ad_headline"
+								tools:text="Body" />
+
+							<TextView
+								android:id="@+id/txt_ad_advertiser"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="12dp"
+								android:textSize="16sp"
+								app:layout_constraintTop_toBottomOf="@+id/txt_ad_body"
+								tools:text="Advertiser" />
+
+							<TextView
+								android:id="@+id/txt_ad_price"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="12dp"
+								android:textSize="16sp"
+								android:visibility="gone"
+								app:layout_constraintTop_toBottomOf="@+id/txt_ad_advertiser"
+								tools:text="Price" />
+
+							<TextView
+								android:id="@+id/txt_ad_store"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="12dp"
+								android:textSize="16sp"
+								android:visibility="gone"
+								app:layout_constraintTop_toBottomOf="@+id/txt_ad_price"
+								tools:text="Store" />
+
+							<ImageView
+								android:id="@+id/img_ad_icon"
+								android:layout_width="50dp"
+								android:layout_height="50dp"
+								android:layout_marginTop="12dp"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@+id/txt_ad_store"
+								tools:ignore="ContentDescription"
+								tools:src="@color/colorAccent" />
+
+							<com.google.android.gms.ads.nativead.MediaView
+								android:id="@+id/view_ad_media"
+								android:layout_width="150dp"
+								android:layout_height="150dp"
+								android:layout_marginTop="12dp"
+								android:background="@color/colorAccent"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@+id/img_ad_icon" />
+
+							<RatingBar
+								android:id="@+id/rating_ad_stars"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="12dp"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@+id/view_ad_media" />
+
+							<Button
+								android:id="@+id/btn_ad_action"
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								app:layout_constraintStart_toStartOf="parent"
+								app:layout_constraintTop_toBottomOf="@+id/rating_ad_stars"
+								tools:text="Action" />
+
+						</androidx.constraintlayout.widget.ConstraintLayout>
+
+					</com.google.android.gms.ads.nativead.NativeAdView>
+
+				</androidx.constraintlayout.widget.ConstraintLayout>
+
+			</androidx.core.widget.NestedScrollView>
+
+		</FrameLayout>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

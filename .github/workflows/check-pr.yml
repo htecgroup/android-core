@@ -1,0 +1,49 @@
+name: Check PR
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+    branches:
+      - main
+    paths-ignore:
+      - 'sample/**'
+
+jobs:
+  check-pr:
+    if: ${{ !startsWith(github.event.pull_request.head.ref, 'bump-') }}
+    runs-on: ubuntu-latest
+    env:
+      BOM_VERSION_SUFFIX: -LOCAL
+    steps:
+      - name: Setup java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Code style check
+        run: ./gradlew detekt
+
+      - name: Build release
+        run: ./gradlew assembleRelease
+
+      - name: Publish locally
+        run: ./gradlew publish
+
+      - name: Sample app - Code style check
+        run: |
+          cd ./sample
+          ./gradlew detekt
+
+      - name: Sample app - Build
+        run: |
+          cd ./sample
+          ./gradlew assembleDebug
+
+      - name: Sample app - Test
+        run: |
+          cd ./sample
+          ./gradlew test
