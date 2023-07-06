@@ -7,7 +7,6 @@ on:
       - main
     paths-ignore:
       - 'sample/**'
-  workflow_dispatch:
 
 jobs:
   snapshot:
