@@ -121,7 +121,10 @@ private fun Project.publication(componentName: String, config: MavenPublishingCo
             }
         })
     }
-    configureSigning()
+
+    if (!config.version.endsWith("LOCAL")) {
+        configureSigning()
+    }
 }
 
 private fun Project.configureSigning() {
