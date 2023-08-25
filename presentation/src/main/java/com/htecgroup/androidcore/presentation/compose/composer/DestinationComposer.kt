@@ -51,7 +51,7 @@ abstract class DestinationComposer<ViewModelT : ViewModel> {
      * Override to specify a [Composable] content for this screen.
      */
     @Composable
-    fun Compose(navController: NavHostController) {
+    open fun Compose(navController: NavHostController) {
         Content(navController = navController, viewModel = coreViewModel(viewModelClass))
     }
 
