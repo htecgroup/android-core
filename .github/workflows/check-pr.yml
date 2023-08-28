@@ -31,7 +31,7 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: Publish locally
-        run: ./gradlew publish
+        run: ./gradlew publishToMavenLocal
 
       - name: Sample app - Code style check
         run: |
