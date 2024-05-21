@@ -34,7 +34,7 @@ suspend fun <OutT : Any, DataT : Any> Result<DataT>.flatMap(
  * Applies [block] function on [DataT] if it's non-null, and wraps the result [OutT] into [Result].
  * Returns success if [DataT] is null.
  */
-suspend fun <OutT : Any, DataT : Any> Result<DataT?>.applyIfSome(
+suspend fun <OutT : Any, DataT : Any> Result<DataT?>.flatMapIfSome(
     block: suspend (DataT) -> Result<OutT?>
 ): Result<OutT?> {
     val data: DataT? = getOrNull()
