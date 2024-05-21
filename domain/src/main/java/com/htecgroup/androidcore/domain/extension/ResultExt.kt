@@ -19,7 +19,7 @@ package com.htecgroup.androidcore.domain.extension
 /**
  * Applies [block] function on [DataT] and wraps the result [OutT] into [Result].
  */
-suspend fun <OutT : Any, DataT : Any> Result<DataT>.apply(
+suspend fun <OutT : Any, DataT : Any> Result<DataT>.flatMap(
     block: suspend (DataT?) -> Result<OutT>
 ): Result<OutT> {
     val exception = exceptionOrNull()
