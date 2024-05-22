@@ -20,8 +20,12 @@ import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 
 object Repositories {
 	const val jitpack = "https://jitpack.io"
+	const val snapshotsRepository = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 }
 
 fun RepositoryHandler.jitpack(): MavenArtifactRepository =
 	maven { setUrl(Repositories.jitpack) }
+
+fun RepositoryHandler.sonatypeSnapshot(): MavenArtifactRepository =
+	maven { setUrl(Repositories.snapshotsRepository) }
 
