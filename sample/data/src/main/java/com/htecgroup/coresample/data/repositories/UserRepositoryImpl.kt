@@ -17,7 +17,7 @@
 package com.htecgroup.coresample.data.repositories
 
 import com.htecgroup.androidcore.data.CoreRepository
-import com.htecgroup.androidcore.domain.extension.applyIfSome
+import com.htecgroup.androidcore.domain.extension.flatMapIfSome
 import com.htecgroup.androidcore.domain.extension.mapWrapListResult
 import com.htecgroup.androidcore.domain.extension.mapWrapResult
 import com.htecgroup.androidcore.domain.extension.toUnitResult
@@ -49,13 +49,13 @@ class UserRepositoryImpl
     override suspend fun fetchUsers(): Result<Unit> =
         safeApiCall { userApi.getUsers() }
             .map { users -> users.map { it.toUserEntity() } }
-            .applyIfSome { safeDbCall { userDao.updateUsers(it) } }
+            .flatMapIfSome { safeDbCall { userDao.updateUsers(it) } }
             .toUnitResult()
 
     override suspend fun fetchUser(userId: Int): Result<Unit> =
         safeApiCall { userApi.getUser(userId) }
             .map { it.toUserEntity() }
-            .applyIfSome { safeDbCall { userDao.insert(it) } }
+            .flatMapIfSome { safeDbCall { userDao.insert(it) } }
             .toUnitResult()
 
     override suspend fun removeUsers(): Result<Unit> =
