@@ -21,6 +21,7 @@ buildscript {
 	repositories {
 		google()
 		mavenCentral()
+		sonatypeSnapshot()
 		mavenLocal()
 	}
 	dependencies {
@@ -46,6 +47,7 @@ allprojects {
 	repositories {
 		google()
 		mavenCentral()
+		sonatypeSnapshot()
 		mavenLocal()
 		jitpack()
 	}
