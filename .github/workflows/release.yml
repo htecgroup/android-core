@@ -129,3 +129,5 @@ jobs:
 
       - name: Publish release
         run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+      - name: Reset publish flags
+        run: ./gradlew resetPublishFlags

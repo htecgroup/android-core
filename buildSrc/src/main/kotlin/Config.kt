@@ -32,6 +32,7 @@ object Config {
         val javaVersion = JavaVersion.VERSION_17
         abstract val moduleName: String
         override val version: String get() = VersionProperties(this).version
+        override val skipPublishing: Boolean get() = VersionProperties(this).skipPublishing
     }
 
     object Bom : Core() {

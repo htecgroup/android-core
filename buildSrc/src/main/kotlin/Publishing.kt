@@ -17,7 +17,6 @@
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
-import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
@@ -45,81 +44,84 @@ interface MavenPublishingConfig {
     val artifactId: String
     val group: String
     val version: String
+    val skipPublishing: Boolean
     val description: String
 }
 
 private fun Project.publication(componentName: String, config: MavenPublishingConfig, sourceSet: Set<File>?) {
-    afterEvaluate {
-        extensions.configure("publishing", Action<PublishingExtension> {
-            publications {
-                create(config.configName, MavenPublication::class.java) {
-                    from(components.getByName(componentName))
-                    artifactId = config.artifactId
-                    groupId = config.group
-                    version = config.version
+    if (config.version.endsWith("LOCAL") || !config.skipPublishing) {
+        afterEvaluate {
+            extensions.configure("publishing", Action<PublishingExtension> {
+                publications {
+                    create(config.configName, MavenPublication::class.java) {
+                        from(components.getByName(componentName))
+                        artifactId = config.artifactId
+                        groupId = config.group
+                        version = config.version
 
-                    pom {
-                        name.set(config.artifactId)
-                        description.set(config.description)
-                        url.set(MavenPublishingConfig.PUBLISH_URL)
+                        pom {
+                            name.set(config.artifactId)
+                            description.set(config.description)
+                            url.set(MavenPublishingConfig.PUBLISH_URL)
 
-                        licenses {
-                            license {
-                                name.set(MavenPublishingConfig.PUBLISH_LICENSE_NAME)
-                                url.set(MavenPublishingConfig.PUBLISH_LICENSE_URL)
+                            licenses {
+                                license {
+                                    name.set(MavenPublishingConfig.PUBLISH_LICENSE_NAME)
+                                    url.set(MavenPublishingConfig.PUBLISH_LICENSE_URL)
+                                }
+                            }
+
+                            if (sourceSet != null) {
+                                artifacts {
+                                    artifact(
+                                        project.task<Jar>("androidSourcesJar") {
+                                            archiveClassifier.set("sources")
+                                            from(sourceSet)
+                                        }
+                                    )
+                                    artifact(
+                                        project.task<Jar>("javadocJar") {
+                                            archiveClassifier.set("javadoc")
+                                            from(tasks.getByName("dokkaJavadoc").outputs)
+                                        }
+                                    )
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id.set("stefansimonovic-htec")
+                                    name.set("Stefan Simonovic")
+                                    email.set("stefan.simonovic@htecgroup.com")
+                                }
+                                developer {
+                                    id.set("bojanb-htec")
+                                    name.set("Bojan Bogojevic")
+                                    email.set("bojan.bogojevic@htecgroup.com")
+                                }
+                                developer {
+                                    id.set("stefan-sentic")
+                                    name.set("Stefan Sentic")
+                                    email.set("stefan.sentic@htecgroup.com")
+                                }
+                            }
+
+                            scm {
+                                connection.set(MavenPublishingConfig.PUBLISH_SCM_CONNECTION)
+                                developerConnection.set(MavenPublishingConfig.PUBLISH_SCM_DEVELOPER_CONNECTION)
+                                url.set(MavenPublishingConfig.PUBLISH_SCM_URL)
                             }
                         }
+                    }
 
-                        if (sourceSet != null) {
-                            artifacts {
-                                artifact(
-                                    project.task<Jar>("androidSourcesJar") {
-                                        archiveClassifier.set("sources")
-                                        from(sourceSet)
-                                    }
-                                )
-                                artifact(
-                                    project.task<Jar>("javadocJar"){
-                                        archiveClassifier.set("javadoc")
-                                        from(tasks.getByName("dokkaJavadoc").outputs)
-                                    }
-                                )
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id.set("stefansimonovic-htec")
-                                name.set("Stefan Simonovic")
-                                email.set("stefan.simonovic@htecgroup.com")
-                            }
-                            developer {
-                                id.set("bojanb-htec")
-                                name.set("Bojan Bogojevic")
-                                email.set("bojan.bogojevic@htecgroup.com")
-                            }
-                            developer {
-                                id.set("stefan-sentic")
-                                name.set("Stefan Sentic")
-                                email.set("stefan.sentic@htecgroup.com")
-                            }
-                        }
-
-                        scm {
-                            connection.set(MavenPublishingConfig.PUBLISH_SCM_CONNECTION)
-                            developerConnection.set(MavenPublishingConfig.PUBLISH_SCM_DEVELOPER_CONNECTION)
-                            url.set(MavenPublishingConfig.PUBLISH_SCM_URL)
+                    repositories {
+                        if (config.version.endsWith("LOCAL")) {
+                            mavenLocal { }
                         }
                     }
                 }
-
-                repositories {
-                    if (config.version.endsWith("LOCAL")) {
-                        mavenLocal { }
-                    }
-                }
-            }
-        })
+            })
+        }
     }
 
     if (!config.version.endsWith("LOCAL")) {
