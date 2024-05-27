@@ -112,4 +112,6 @@ tasks {
     register("bumpBomPatch", versioning.BumpBomPatch::class) { module = Config.Bom }
     register("bumpBomMinor", versioning.BumpBomMinor::class) { module = Config.Bom }
     register("bumpBomMajor", versioning.BumpBomMajor::class) { module = Config.Bom }
+
+    register("resetPublishFlags", versioning.ResetPublishFlags::class)
 }
