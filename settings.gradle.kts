@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+// TODO add plugin management settings here
+
+
 plugins {
     // See https://jmfayard.github.io/refreshVersions
     id("de.fayard.refreshVersions") version "0.51.0"
@@ -39,4 +42,6 @@ include(
     ":sample:presentation",
     ":sample:presentation-databinding"
 )
+// TODO add dependency resolution managemet settings here
+
 System.setProperty("rootDir", rootDir.toString())

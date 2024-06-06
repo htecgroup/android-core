@@ -66,7 +66,7 @@ version = Config.Bom.version
 apply(from = Config.Domain.publishingRoot)
 
 tasks.wrapper {
-    gradleVersion = "7.5.1"
+    gradleVersion = "8.4.1"
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -77,7 +77,7 @@ tasks.withType<KotlinCompile>().all {
 }
 
 tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 tasks.dokkaHtmlMultiModule {

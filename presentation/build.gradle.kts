@@ -33,7 +33,6 @@ android {
 
     defaultConfig {
         minSdk = Config.Presentation.minSdkVersion
-        targetSdk = Config.Presentation.targetSdkVersion
     }
 
     compileOptions {

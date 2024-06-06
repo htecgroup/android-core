@@ -22,7 +22,6 @@ object Config {
     abstract class Core : MavenPublishingConfig {
         val compileSdkVersion = 31
         val minSdkVersion = 21
-        val targetSdkVersion = 31
         val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val release = "release"
         val debug = "debug"

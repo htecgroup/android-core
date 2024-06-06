@@ -28,7 +28,6 @@ android {
 
     defaultConfig {
         minSdk = Config.Test.minSdkVersion
-        targetSdk = Config.Test.targetSdkVersion
     }
 
     compileOptions {
