@@ -15,10 +15,11 @@
  */
 
 plugins {
-    id(Plugins.androidApplication)
-    kotlin(Plugins.android)
-    kotlin(Plugins.kapt)
-    id(Plugins.hilt)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.com.google.dagger.hilt.android)
+
     id(Plugins.firebaseCrashlytics)
     id(Plugins.firebaseAppDistribution)
 }

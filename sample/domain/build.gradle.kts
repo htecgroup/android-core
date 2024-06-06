@@ -15,11 +15,11 @@
  */
 
 plugins {
-	id(Plugins.androidLibrary)
-	kotlin(Plugins.android)
-	kotlin(Plugins.kapt)
-	id(Plugins.junit5)
-	id(Plugins.hilt)
+	alias(libs.plugins.android.library)
+	alias(libs.plugins.jetbrains.kotlin.android)
+	alias(libs.plugins.com.google.dagger.hilt.android)
+	alias(libs.plugins.org.jetbrains.kotlin.kapt)
+	alias(libs.plugins.android.junit5)
 }
 
 apply(from = Config.Sample.detekt)

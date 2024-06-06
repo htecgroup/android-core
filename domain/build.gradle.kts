@@ -15,9 +15,9 @@
  */
 
 plugins {
-    id(Plugins.javaLibrary)
-    id(Plugins.kotlinJvm)
-    id(Plugins.dokka)
+    id("java-library")
+    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.org.jetbrains.dokka)
     id(Plugins.mavenPublish)
 }
 

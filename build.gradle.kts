@@ -24,12 +24,10 @@ buildscript {
 //        classpath(Libs.kotlin_gradle_plugin)
         classpath(Libs.google_services)
         classpath(Libs.firebase_crashlytics_gradle)
-        classpath(Libs.android_junit5)
         classpath(Libs.firebase_appdistribution_gradle) {
             // Conflicting versions with refreshVersions plugin
             exclude(group = "com.google.guava", module = "guava")
         }
-        classpath(Libs.hilt_android_gradle_plugin)
         classpath(Libs.navigation_safe_args_gradle_plugin)
         classpath(Libs.versioning_plugin)
     }
@@ -40,11 +38,17 @@ dependencies {
 
 plugins {
     alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.com.google.dagger.hilt.android) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.android.junit5) apply false
+    alias(libs.plugins.jetbrains.kotlin.jvm) apply false
 
-    id(Plugins.detekt).version(Libs.io_gitlab_arturbosch_detekt_gradle_plugin)
-    id(Plugins.dokka).version(Libs.org_jetbrains_dokka_gradle_plugin)
-    id(Plugins.gradleNexusPublishing).version(Libs.io_github_gradle_nexus_publish_plugin_gradle_plugin)
+    alias(libs.plugins.io.gitlab.arturbosch.detekt)
+    alias(libs.plugins.gradle.nexus.publish.plugin)
+    alias(libs.plugins.org.jetbrains.dokka)
 }
 
 version = Config.Bom.version
