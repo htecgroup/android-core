@@ -28,6 +28,8 @@ plugins {
 apply(from = Config.Sample.detekt)
 
 android {
+
+	namespace = "${Config.Sample.applicationId}.presentation"
 	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {

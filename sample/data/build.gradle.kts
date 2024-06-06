@@ -25,6 +25,7 @@ plugins {
 apply(from = Config.Sample.detekt)
 
 android {
+	namespace = "${Config.Sample.applicationId}.data"
 	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {
@@ -57,6 +58,10 @@ android {
 
 	kotlinOptions {
 		jvmTarget = Config.Sample.javaVersion.toString()
+	}
+
+	buildFeatures {
+		buildConfig = true
 	}
 
 	lint {

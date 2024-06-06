@@ -28,6 +28,7 @@ plugins {
 apply(from = Config.PresentationDatabinding.detekt)
 
 android {
+    namespace = Config.PresentationDatabinding.namespace
     compileSdk = Config.PresentationDatabinding.compileSdkVersion
 
     defaultConfig {

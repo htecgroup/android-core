@@ -14,8 +14,37 @@
  * limitations under the License.
  */
 
-// TODO add plugin management settings here
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+        maven { setUrl("https://jitpack.io") }
+        maven { setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
+//        sonatypeSnapshot()
+//        jitpack()
+        mavenLocal()
+    }
+}
 
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
+        maven { setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
+        //        sonatypeSnapshot()
+        //        jitpack()
+        mavenLocal()
+    }
+}
 
 plugins {
     // See https://jmfayard.github.io/refreshVersions
@@ -42,6 +71,5 @@ include(
     ":sample:presentation",
     ":sample:presentation-databinding"
 )
-// TODO add dependency resolution managemet settings here
 
 System.setProperty("rootDir", rootDir.toString())

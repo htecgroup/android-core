@@ -26,6 +26,7 @@ plugins {
 apply(from = Config.Sample.detekt)
 
 android {
+    namespace = "${Config.Sample.applicationId}.app"
     compileSdk = Config.Sample.compileSdkVersion
 
     defaultConfig {
@@ -82,6 +83,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -111,7 +113,3 @@ dependencies {
 }
 
 apply(plugin = Plugins.googleServices)
-
-repositories {
-    mavenCentral()
-}

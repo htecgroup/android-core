@@ -29,6 +29,7 @@ plugins {
 apply(from = Config.Presentation.detekt)
 
 android {
+    namespace = Config.Presentation.namespace
     compileSdk = Config.Presentation.compileSdkVersion
 
     defaultConfig {
@@ -62,10 +63,6 @@ dependencies {
     api(Libs.multidex)
 
     dokkaHtmlPartialPlugin(Libs.versioning_plugin)
-}
-
-repositories {
-    mavenCentral()
 }
 
 configureReleasePublication(Config.Presentation, android.sourceSets["main"].java.srcDirs)

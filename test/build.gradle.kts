@@ -24,6 +24,7 @@ plugins {
 apply(from = Config.Test.detekt)
 
 android {
+    namespace = Config.Test.namespace
     compileSdk = Config.Test.compileSdkVersion
 
     defaultConfig {

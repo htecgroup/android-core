@@ -51,7 +51,7 @@ public object Libs {
 
     public const val recyclerview: String = "androidx.recyclerview:recyclerview:_"
 
-    public const val com_android_tools_build_gradle: String = "com.android.tools.build:gradle:_"
+//    public const val com_android_tools_build_gradle: String = "com.android.tools.build:gradle:_"
 
     public const val hilt_android: String = "com.google.dagger:hilt-android:_"
 
@@ -104,7 +104,7 @@ public object Libs {
     public const val kotlin_annotation_processing_gradle: String =
             "org.jetbrains.kotlin:kotlin-annotation-processing-gradle:_"
 
-    public const val kotlin_gradle_plugin: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:_"
+//    public const val kotlin_gradle_plugin: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:_"
 
     public const val kotlin_scripting_compiler_embeddable: String =
             "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:_"

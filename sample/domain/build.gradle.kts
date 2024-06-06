@@ -25,6 +25,8 @@ plugins {
 apply(from = Config.Sample.detekt)
 
 android {
+
+	namespace = "${Config.Sample.applicationId}.domain"
 	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {
@@ -87,8 +89,4 @@ dependencies {
 	//testImplementation(Libs.junit)
 	testRuntimeOnly(Libs.junit_vintage_engine)
 
-}
-
-repositories {
-	mavenCentral()
 }
