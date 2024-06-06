@@ -23,10 +23,19 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        sonatypeSnapshot()
+        mavenLocal()
     }
     dependencies {
         classpath(Libs.com_android_tools_build_gradle)
         classpath(Libs.kotlin_gradle_plugin)
+        classpath(Libs.google_services)
+        classpath(Libs.firebase_crashlytics_gradle)
+        classpath(Libs.android_junit5)
+        classpath(Libs.firebase_appdistribution_gradle) {
+            // Conflicting versions with refreshVersions plugin
+            exclude(group = "com.google.guava", module = "guava")
+        }
         classpath(Libs.hilt_android_gradle_plugin)
         classpath(Libs.navigation_safe_args_gradle_plugin)
         classpath(Libs.versioning_plugin)
@@ -46,6 +55,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        sonatypeSnapshot()
         jitpack()
         mavenLocal()
     }

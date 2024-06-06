@@ -22,26 +22,26 @@ plugins {
 	id(Plugins.hilt)
 }
 
-apply(from = Config.CoreSample.detekt)
+apply(from = Config.Sample.detekt)
 
 android {
-	compileSdk = Config.CoreSample.compileSdkVersion
+	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {
-		minSdk = Config.CoreSample.minSdkVersion
-		targetSdk = Config.CoreSample.targetSdkVersion
+		minSdk = Config.Sample.minSdkVersion
+		targetSdk = Config.Sample.targetSdkVersion
 
-		testInstrumentationRunner = Config.CoreSample.instrumentationRunner
+		testInstrumentationRunner = Config.Sample.instrumentationRunner
 		consumerProguardFiles("consumer-rules.pro")
 	}
 
 	compileOptions {
-		sourceCompatibility = Config.CoreSample.javaVersion
-		targetCompatibility = Config.CoreSample.javaVersion
+		sourceCompatibility = Config.Sample.javaVersion
+		targetCompatibility = Config.Sample.javaVersion
 	}
 
 	kotlinOptions {
-		jvmTarget = Config.CoreSample.javaVersion.toString()
+		jvmTarget = Config.Sample.javaVersion.toString()
 	}
 
 	lint {
@@ -57,8 +57,7 @@ android {
 }
 
 dependencies {
-	api(platform(Libs.bom))
-	api(Libs.domain)
+	api(project(Config.Domain.moduleName))
 
 	// Hilt
 	implementation(Libs.hilt_android)
@@ -68,7 +67,7 @@ dependencies {
 	implementation(Libs.kotlinx_coroutines_core)
 	implementation(Libs.kotlinx_coroutines_android)
 
-	testImplementation(Libs.test)
+	testImplementation(project(Config.Test.moduleName))
 
 	testImplementation(Libs.robolectric)
 	testImplementation(Libs.core_testing)

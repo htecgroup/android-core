@@ -23,27 +23,27 @@ plugins {
     id(Plugins.firebaseAppDistribution)
 }
 
-apply(from = Config.CoreSample.detekt)
+apply(from = Config.Sample.detekt)
 
 android {
-    compileSdk = Config.CoreSample.compileSdkVersion
+    compileSdk = Config.Sample.compileSdkVersion
 
     defaultConfig {
-        applicationId = Config.CoreSample.applicationId
-        minSdk = Config.CoreSample.minSdkVersion
-        targetSdk = Config.CoreSample.targetSdkVersion
+        applicationId = Config.Sample.applicationId
+        minSdk = Config.Sample.minSdkVersion
+        targetSdk = Config.Sample.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = Config.CoreSample.instrumentationRunner
-        multiDexEnabled = Config.CoreSample.multiDex
+        testInstrumentationRunner = Config.Sample.instrumentationRunner
+        multiDexEnabled = Config.Sample.multiDex
     }
 
     signingConfigs {
 
         Signing.loadReleaseProperties(project)
 
-        create(Config.CoreSample.release) {
+        create(Config.Sample.release) {
             if (Signing.keystoreProperties.isNotEmpty()) {
                 keyAlias = Signing.keyAlias
                 keyPassword = Signing.keyPassword
@@ -54,29 +54,29 @@ android {
     }
 
     buildTypes {
-        getByName(Config.CoreSample.release) {
-            isMinifyEnabled = Config.CoreSample.minifyEnabled
+        getByName(Config.Sample.release) {
+            isMinifyEnabled = Config.Sample.minifyEnabled
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName(Config.CoreSample.release)
+            signingConfig = signingConfigs.getByName(Config.Sample.release)
         }
-        getByName(Config.CoreSample.debug) {
+        getByName(Config.Sample.debug) {
             firebaseAppDistribution {
-                groups = Config.FirebaseDistribution.groups
-                releaseNotesFile = Config.FirebaseDistribution.releaseNotesFile
-                serviceCredentialsFile = Config.FirebaseDistribution.serviceCredentialsFile
+                groups = Config.Sample.FirebaseDistribution.groups
+                releaseNotesFile = Config.Sample.FirebaseDistribution.releaseNotesFile
+                serviceCredentialsFile = Config.Sample.FirebaseDistribution.serviceCredentialsFile
             }
         }
     }
     compileOptions {
-        sourceCompatibility = Config.CoreSample.javaVersion
-        targetCompatibility = Config.CoreSample.javaVersion
+        sourceCompatibility = Config.Sample.javaVersion
+        targetCompatibility = Config.Sample.javaVersion
     }
 
     kotlinOptions {
-        jvmTarget = Config.CoreSample.javaVersion.toString()
+        jvmTarget = Config.Sample.javaVersion.toString()
     }
 
     buildFeatures {
@@ -86,14 +86,14 @@ android {
 }
 
 dependencies {
-    implementation(project(Config.Module.domain))
-    implementation(project(Config.Module.data))
+    implementation(project(Config.Sample.Module.domain))
+    implementation(project(Config.Sample.Module.data))
     /**
      * #DataBindingSample
      * Change with the following line to enable databinding example
-     * implementation(project(Config.Module.presentationDatabinding))
+     * implementation(project(Config.Sample.Module.presentationDatabinding))
      */
-    implementation(project(Config.Module.presentation))
+    implementation(project(Config.Sample.Module.presentation))
 
     // Hilt
     implementation(Libs.hilt_android)

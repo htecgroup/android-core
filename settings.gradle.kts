@@ -15,16 +15,28 @@
  */
 
 plugins {
-	// See https://jmfayard.github.io/refreshVersions
-	id("de.fayard.refreshVersions") version "0.51.0"
+    // See https://jmfayard.github.io/refreshVersions
+    id("de.fayard.refreshVersions") version "0.51.0"
 }
 
 refreshVersions {
-	enableBuildSrcLibs()
-	rejectVersionIf {
-		candidate.stabilityLevel.isLessStableThan(current.stabilityLevel)
-	}
+    enableBuildSrcLibs()
+    rejectVersionIf {
+        candidate.stabilityLevel.isLessStableThan(current.stabilityLevel)
+    }
 }
 
-include(":domain", ":data", ":presentation", ":presentation-databinding", ":test", ":bom")
+include(
+    ":domain",
+    ":data",
+    ":presentation",
+    ":presentation-databinding",
+    ":test",
+    ":bom",
+    ":sample:app",
+    ":sample:data",
+    ":sample:domain",
+    ":sample:presentation",
+    ":sample:presentation-databinding"
+)
 System.setProperty("rootDir", rootDir.toString())

@@ -30,4 +30,16 @@ object Plugins {
 	const val detekt = "io.gitlab.arturbosch.detekt"
 	const val javaLibrary = "java-library"
 	const val gradleNexusPublishing = "io.github.gradle-nexus.publish-plugin"
+
+
+	// *** from sample
+	const val androidApplication = "com.android.application"
+
+	const val kotlinParcelize = "kotlin-parcelize"
+
+	const val junit5 = "de.mannodermaus.android-junit5"
+	const val firebaseAppDistribution = "com.google.firebase.appdistribution"
+	const val googleServices = "com.google.gms.google-services"
+	const val firebaseCrashlytics = "com.google.firebase.crashlytics"
+	// ^^^ from sample
 }

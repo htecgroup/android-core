@@ -76,4 +76,40 @@ object Config {
         override val moduleName = ":test"
         override val description = "A set of classes wich contain some basic setup for testing."
     }
+
+    object Sample {
+        const val applicationId = "com.htecgroup.coresample"
+        const val compileSdkVersion = 33
+        const val minSdkVersion = 21
+        const val targetSdkVersion = 33
+        const val versionCode = 1
+        const val versionName = "1.0.0"
+        const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        const val release = "release"
+        const val debug = "debug"
+        const val minifyEnabled = true
+        const val multiDex = true
+        const val detekt = "../../scripts/detekt.gradle"
+        val javaVersion = JavaVersion.VERSION_17
+
+        object Module {
+            const val presentationDatabinding = ":sample:presentation-databinding"
+            const val presentation = ":sample:presentation"
+            const val domain = ":sample:domain"
+            const val data = ":sample:data"
+            const val test = ":sample:test"
+        }
+
+        object FirebaseDistribution {
+            const val groups = "htec"
+            const val releaseNotesFile = "./app/release-notes.txt"
+            const val serviceCredentialsFile = "./app/core-sample-firebase.json"
+        }
+
+        object Dev {
+            const val name = "dev"
+            const val dimension = "core"
+            const val appIdSuffix = ".dev"
+        }
+    }
 }

@@ -25,21 +25,21 @@ plugins {
 	id(Plugins.kotlinParcelize)
 }
 
-apply(from = Config.CoreSample.detekt)
+apply(from = Config.Sample.detekt)
 
 android {
-	compileSdk = Config.CoreSample.compileSdkVersion
+	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {
-		minSdk = Config.CoreSample.minSdkVersion
-		targetSdk = Config.CoreSample.targetSdkVersion
-		testInstrumentationRunner = Config.CoreSample.instrumentationRunner
+		minSdk = Config.Sample.minSdkVersion
+		targetSdk = Config.Sample.targetSdkVersion
+		testInstrumentationRunner = Config.Sample.instrumentationRunner
 		consumerProguardFiles("consumer-rules.pro")
 	}
 
 	buildTypes {
-		getByName(Config.CoreSample.release) {
-			isMinifyEnabled = Config.CoreSample.minifyEnabled
+		getByName(Config.Sample.release) {
+			isMinifyEnabled = Config.Sample.minifyEnabled
 			proguardFiles(
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
@@ -47,12 +47,12 @@ android {
 		}
 	}
 	compileOptions {
-		sourceCompatibility = Config.CoreSample.javaVersion
-		targetCompatibility = Config.CoreSample.javaVersion
+		sourceCompatibility = Config.Sample.javaVersion
+		targetCompatibility = Config.Sample.javaVersion
 	}
 
 	kotlinOptions {
-		jvmTarget = Config.CoreSample.javaVersion.toString()
+		jvmTarget = Config.Sample.javaVersion.toString()
 	}
 
 	lint {
@@ -76,9 +76,8 @@ android {
 }
 
 dependencies {
-	api(platform(Libs.bom))
-	api(Libs.presentation)
-	implementation(project(Config.Module.domain))
+	api(project(Config.Presentation.moduleName))
+	implementation(project(Config.Sample.Module.domain))
 
 	// Compose
 	implementation(Libs.material3)
@@ -101,7 +100,7 @@ dependencies {
 	implementation(Libs.work_runtime_ktx)
 
 	// Test
-	testImplementation(Libs.test)
+	testImplementation(project(Config.Test.moduleName))
 	testImplementation(Libs.robolectric)
 	testImplementation(Libs.core_testing)
 	testImplementation(Libs.core_ktx)
