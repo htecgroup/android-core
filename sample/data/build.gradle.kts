@@ -42,15 +42,6 @@ android {
 		}
 	}
 
-	buildTypes {
-		getByName(Config.Sample.release) {
-			isMinifyEnabled = Config.Sample.minifyEnabled
-			proguardFiles(
-				getDefaultProguardFile("proguard-android-optimize.txt"),
-				"proguard-rules.pro"
-			)
-		}
-	}
 	compileOptions {
 		sourceCompatibility = Config.Sample.javaVersion
 		targetCompatibility = Config.Sample.javaVersion

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.internal.packaging.defaultExcludes
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile

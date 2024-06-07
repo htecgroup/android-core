@@ -67,7 +67,7 @@ object Config {
         override val configName = "PresentationDatabinding"
         override val artifactId = "presentation-databinding"
         override val moduleName = ":presentation-databinding"
-        override val namespace = "${group}.presentation.databinding"
+        override val namespace = "${group}.presentation"
         override val description = "A set of base classes for creating UI primarily based on Data Binding."
     }
 
