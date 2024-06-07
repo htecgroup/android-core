@@ -19,9 +19,9 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.com.google.dagger.hilt.android)
-
-    id(Plugins.firebaseCrashlytics)
-    id(Plugins.firebaseAppDistribution)
+    alias(libs.plugins.com.google.firebase.crashlytics)
+    alias(libs.plugins.com.google.firebase.appdistribution)
+    alias(libs.plugins.com.google.gms.google.services)
 }
 
 apply(from = Config.Sample.detekt)
@@ -112,5 +112,3 @@ dependencies {
 
     implementation(Libs.work_runtime_ktx)
 }
-
-apply(plugin = Plugins.googleServices)

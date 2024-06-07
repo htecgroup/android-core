@@ -21,15 +21,14 @@ plugins {
 	alias(libs.plugins.com.google.dagger.hilt.android)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.android.junit5)
-
-	id(Plugins.androidxNavigationSafeargs)
+	alias(libs.plugins.androidx.navigation.safeargs)
 }
 
 apply(from = Config.Sample.detekt)
 
 android {
 
-	namespace = "${Config.Sample.applicationId}.presentation.databinding"
+	namespace = "${Config.Sample.applicationId}.presentation"
 	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {

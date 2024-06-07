@@ -18,7 +18,7 @@ plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
     alias(libs.plugins.org.jetbrains.dokka)
-    id(Plugins.mavenPublish)
+    id("maven-publish")
 }
 
 apply(from = Config.Domain.detekt)
@@ -29,9 +29,9 @@ java {
 }
 
 dependencies {
-    implementation(Libs.kotlinx_coroutines_android)
+    implementation(libs.kotlinx.coroutines.android)
 
-    dokkaHtmlPartialPlugin(Libs.versioning_plugin)
+    dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
 
 configureJavaPublication(Config.Domain, sourceSets["main"].java.srcDirs)

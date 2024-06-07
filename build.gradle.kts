@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.android.build.gradle.internal.packaging.defaultExcludes
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -22,21 +23,24 @@ buildscript {
     dependencies {
 //        classpath(Libs.com_android_tools_build_gradle)
 //        classpath(Libs.kotlin_gradle_plugin)
-        classpath(Libs.google_services)
-        classpath(Libs.firebase_crashlytics_gradle)
-        classpath(Libs.firebase_appdistribution_gradle) {
-            // Conflicting versions with refreshVersions plugin
-            exclude(group = "com.google.guava", module = "guava")
-        }
-        classpath(Libs.navigation_safe_args_gradle_plugin)
-        classpath(Libs.versioning_plugin)
+//        classpath(Libs.firebase_crashlytics_gradle)
+//        classpath(Libs.firebase_appdistribution_gradle) {
+//            // Conflicting versions with refreshVersions plugin
+//            exclude(group = "com.google.guava", module = "guava")
+//        }
+        classpath(libs.versioning.plugin)
     }
 }
 dependencies {
-    dokkaHtmlMultiModulePlugin(Libs.versioning_plugin)
+    dokkaHtmlMultiModulePlugin(libs.versioning.plugin)
 }
 
 plugins {
+    alias(libs.plugins.com.google.firebase.crashlytics) apply false
+    alias(libs.plugins.com.google.firebase.appdistribution) apply false
+    alias(libs.plugins.com.google.gms.google.services) apply false
+    alias(libs.plugins.androidx.navigation.safeargs) apply false
+
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false

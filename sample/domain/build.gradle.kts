@@ -61,22 +61,22 @@ dependencies {
 	api(project(Config.Domain.moduleName))
 
 	// Hilt
-	implementation(Libs.hilt_android)
-	kapt(Libs.hilt_android_compiler)
+	implementation(libs.dagger.hilt)
+	kapt(libs.dagger.hilt.compiler)
 
 	// Coroutines/Flows
-	implementation(Libs.kotlinx_coroutines_core)
-	implementation(Libs.kotlinx_coroutines_android)
+	implementation(libs.kotlinx.coroutines.core)
+	implementation(libs.kotlinx.coroutines.android)
 
 	testImplementation(project(Config.Test.moduleName))
 
-	testImplementation(Libs.robolectric)
-	testImplementation(Libs.core_testing)
-	testImplementation(Libs.core_ktx)
-	testImplementation(Libs.kotlinx_coroutines_test)
-	testImplementation(Libs.junit_ktx)
-	testImplementation(Libs.mockk)
-	testImplementation(Libs.kluent_android)
+	testImplementation(libs.robolectric)
+	testImplementation(libs.androidx.core.testing)
+	testImplementation(libs.core.ktx)
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.androidx.junit.ktx)
+	testImplementation(libs.mockk)
+	testImplementation(libs.kluent.android)
 
 	// (Required) Writing and executing Unit Tests on the JUnit Platform
 	testImplementation(Libs.junit_jupiter_api)
@@ -86,7 +86,7 @@ dependencies {
 	testImplementation(Libs.junit_jupiter_params)
 
 	// (Optional) If you also have JUnit 4-based tests
-	//testImplementation(Libs.junit)
+//	testImplementation(libs.junit)
 	testRuntimeOnly(Libs.junit_vintage_engine)
 
 }

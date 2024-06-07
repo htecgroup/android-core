@@ -19,7 +19,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.dokka)
 
-    id(Plugins.mavenPublish)
+    id("maven-publish")
 }
 
 apply(from = Config.Test.detekt)
@@ -39,14 +39,14 @@ android {
 }
 
 dependencies {
-    api(Testing.Junit.Jupiter.api)
-    runtimeOnly(Testing.Junit.Jupiter.engine)
-    api(Testing.MockK)
-    api(AndroidX.archCore.testing)
-    api(KotlinX.coroutines.test)
-    api(Libs.kluent_android)
+    api(libs.junit.jupiter.api)
+    runtimeOnly(libs.junit.jupiter.engine)
+    api(libs.mockk)
+    api(libs.androidx.core.testing)
+    api(libs.kotlinx.coroutines.test)
+    api(libs.kluent.android)
 
-    dokkaHtmlPartialPlugin(Libs.versioning_plugin)
+    dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.Test, android.sourceSets["main"].java.srcDirs)

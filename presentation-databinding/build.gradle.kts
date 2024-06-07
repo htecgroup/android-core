@@ -20,10 +20,9 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.org.jetbrains.dokka)
+    alias(libs.plugins.androidx.navigation.safeargs)
 
-    id(Plugins.androidxNavigationSafeargs)
-
-    id(Plugins.mavenPublish)
+    id("maven-publish")
 }
 
 apply(from = Config.PresentationDatabinding.detekt)
@@ -46,14 +45,15 @@ android {
 }
 
 dependencies {
-    api(AndroidX.recyclerView)
-    api(AndroidX.navigation.fragmentKtx)
-    api(AndroidX.navigation.uiKtx)
-    api(AndroidX.multidex)
-    implementation(Libs.hilt_android)
-    kapt(Libs.hilt_android_compiler)
+    api(libs.androidx.recyclerview)
+    api(libs.androidx.navigation.fragment.ktx)
+    api(libs.androidx.navigation.ui.ktx)
+    api(libs.androidx.multidex)
 
-    dokkaHtmlPartialPlugin(Libs.versioning_plugin)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+
+    dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.PresentationDatabinding, android.sourceSets["main"].java.srcDirs)
