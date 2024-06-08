@@ -79,14 +79,14 @@ dependencies {
 	testImplementation(libs.kluent.android)
 
 	// (Required) Writing and executing Unit Tests on the JUnit Platform
-	testImplementation(Libs.junit_jupiter_api)
-	testRuntimeOnly(Libs.junit_jupiter_engine)
+	testImplementation(libs.junit.jupiter.api)
+	testImplementation(libs.junit.jupiter.engine)
 
 	// (Optional) If you need "Parameterized Tests"
-	testImplementation(Libs.junit_jupiter_params)
+	testImplementation(libs.junit.jupiter.params)
 
 	// (Optional) If you also have JUnit 4-based tests
 //	testImplementation(libs.junit)
-	testRuntimeOnly(Libs.junit_vintage_engine)
+	testImplementation(libs.junit.vintage.engine)
 
 }

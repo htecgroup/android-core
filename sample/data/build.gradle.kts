@@ -73,44 +73,45 @@ dependencies {
 	implementation(project(Config.Sample.Module.domain))
 
 	// Hilt
-	implementation(Libs.hilt_android)
-	kapt(Libs.hilt_android_compiler)
+	implementation(libs.dagger.hilt)
+	kapt(libs.dagger.hilt.compiler)
 
 	// Room
-	implementation(Libs.room_runtime)
-	kapt(Libs.room_compiler)
-	implementation(Libs.room_ktx)
+	implementation(libs.androidx.room.runtime)
+	kapt(libs.androidx.room.compiler)
+	implementation(libs.androidx.room.ktx)
 
 	// Squareup
-	implementation(Libs.logging_interceptor)
+	implementation(libs.logging.interceptor)
 
-	implementation(platform(Libs.firebase_bom))
-	implementation(Libs.firebase_crashlytics_ktx)
-	implementation(Libs.firebase_analytics_ktx)
-	implementation(Libs.firebase_messaging_ktx)
+	implementation(platform(libs.firebase.bom))
+	implementation(libs.firebase.crashlytics.ktx)
+	implementation(libs.firebase.analytics.ktx)
+	implementation(libs.firebase.messaging.ktx)
 
-	implementation(Libs.work_runtime_ktx)
+	implementation(libs.androidx.work.runtime.ktx)
 
-	kapt(Libs.moshi_kotlin_codegen)
+	kapt(libs.moshi.kotlin.codegen)
 
 	// Test
 	testImplementation(project(Config.Test.moduleName))
-	testImplementation(Libs.robolectric)
-	testImplementation(Libs.core_testing)
-	testImplementation(Libs.core_ktx)
-	testImplementation(Libs.kotlinx_coroutines_test)
-	testImplementation(Libs.junit_ktx)
-	testImplementation(Libs.mockk)
-	testImplementation(Libs.kluent_android)
+	testImplementation(libs.robolectric)
+	testImplementation(libs.androidx.core.testing)
+	testImplementation(libs.androidx.core.ktx)
+
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.androidx.junit.ktx)
+	testImplementation(libs.mockk)
+	testImplementation(libs.kluent.android)
 
 	// (Required) Writing and executing Unit Tests on the JUnit Platform
-	testImplementation(Libs.junit_jupiter_api)
-	testRuntimeOnly(Libs.junit_jupiter_engine)
+	testImplementation(libs.junit.jupiter.api)
+	testRuntimeOnly(libs.junit.jupiter.engine)
 
 	// (Optional) If you need "Parameterized Tests"
-	testImplementation(Libs.junit_jupiter_params)
+	testRuntimeOnly(libs.junit.jupiter.params)
 
 	// (Optional) If you also have JUnit 4-based tests
 	//testImplementation(Libs.junit)
-	testRuntimeOnly(Libs.junit_vintage_engine)
+	testRuntimeOnly(libs.junit.vintage.engine)
 }

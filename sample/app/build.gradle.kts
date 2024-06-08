@@ -99,16 +99,16 @@ dependencies {
     implementation(project(Config.Sample.Module.presentation))
 
     // Hilt
-    implementation(Libs.hilt_android)
-    kapt(Libs.hilt_android_compiler)
-    kapt(Libs.hilt_compiler)
+    implementation(libs.dagger.hilt)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.compiler)
 
-    implementation(Libs.play_services_ads)
+    implementation(libs.play.services.ads)
 
-    implementation(platform(Libs.firebase_bom))
-    implementation(Libs.firebase_crashlytics_ktx)
-    implementation(Libs.firebase_analytics_ktx)
-    implementation(Libs.firebase_messaging_ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.messaging.ktx)
 
-    implementation(Libs.work_runtime_ktx)
+    implementation(libs.androidx.work.runtime.ktx)
 }

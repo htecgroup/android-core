@@ -70,43 +70,43 @@ dependencies {
 	implementation(project(Config.Sample.Module.domain))
 
 	// Hilt
-	implementation(Libs.hilt_android)
-	kapt(Libs.hilt_android_compiler)
+	implementation(libs.dagger.hilt)
+	kapt(libs.dagger.hilt.compiler)
 
 
-	implementation(Libs.constraintlayout)
+	implementation(libs.androidx.constraintlayout)
 
-	implementation(Libs.play_services_ads)
+	implementation(libs.play.services.ads)
 
-	implementation(Libs.work_runtime_ktx)
+	implementation(libs.androidx.work.runtime.ktx)
 
-	implementation(Libs.swiperefreshlayout)
+	implementation(libs.androidx.swiperefreshlayout)
 
 	// Test
 	testImplementation(project(Config.Test.moduleName))
-	testImplementation(Libs.robolectric)
-	testImplementation(Libs.core_testing)
-	testImplementation(Libs.core_ktx)
-	testImplementation(Libs.kotlinx_coroutines_test)
-	testImplementation(Libs.junit_ktx)
-	testImplementation(Libs.mockk)
-	testImplementation(Libs.kluent_android)
+	testImplementation(libs.robolectric)
+	testImplementation(libs.androidx.core.testing)
+	testImplementation(libs.core.ktx)
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.androidx.junit.ktx)
+	testImplementation(libs.mockk)
+	testImplementation(libs.kluent.android)
 
 	// (Required) Writing and executing Unit Tests on the JUnit Platform
-	testImplementation(Libs.junit_jupiter_api)
-	testRuntimeOnly(Libs.junit_jupiter_engine)
+	testImplementation(libs.junit.jupiter.api)
+	testImplementation(libs.junit.jupiter.engine)
 
 	// (Optional) If you need "Parameterized Tests"
-	testImplementation(Libs.junit_jupiter_params)
+	testImplementation(libs.junit.jupiter.params)
 
 	// (Optional) If you also have JUnit 4-based tests
 	//testImplementation(Libs.junit)
-	testRuntimeOnly(Libs.junit_vintage_engine)
+	testRuntimeOnly(libs.junit.vintage.engine)
 
 	// Android Test
 
-	androidTestImplementation(Libs.androidx_test_runner)
-	androidTestImplementation(Libs.androidx_test_rules)
-	androidTestImplementation(Libs.espresso_core)
-	androidTestImplementation(Libs.espresso_contrib)
+	androidTestImplementation(libs.androidx.runner)
+	androidTestImplementation(libs.androidx.rules)
+	androidTestImplementation(libs.androidx.espresso.core)
+	androidTestImplementation(libs.androidx.espresso.contrib)
 }
