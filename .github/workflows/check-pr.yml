@@ -24,26 +24,17 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v3
 
-      - name: Code style check
+      - name: Code style check (for core and sample)
         run: ./gradlew detekt
 
       - name: Build release
-        run: ./gradlew assembleRelease
+        run: ./gradlew :data:assembleRelease :presentation:assembleRelease :presentation-databinding:assembleRelease :test:assembleRelease
 
       - name: Publish locally
         run: ./gradlew publishToMavenLocal
 
-      - name: Sample app - Code style check
-        run: |
-          cd ./sample
-          ./gradlew detekt
-
       - name: Sample app - Build
-        run: |
-          cd ./sample
-          ./gradlew assembleDebug
+        run: ./gradlew assembleDebug
 
       - name: Sample app - Test
-        run: |
-          cd ./sample
-          ./gradlew test
+        run: ./gradlew test
