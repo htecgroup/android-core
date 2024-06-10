@@ -20,13 +20,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     dependencies {
-//        classpath(Libs.com_android_tools_build_gradle)
-//        classpath(Libs.kotlin_gradle_plugin)
-//        classpath(Libs.firebase_crashlytics_gradle)
-//        classpath(Libs.firebase_appdistribution_gradle) {
-//            // Conflicting versions with refreshVersions plugin
-//            exclude(group = "com.google.guava", module = "guava")
-//        }
         classpath(libs.versioning.plugin)
     }
 }

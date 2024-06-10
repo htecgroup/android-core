@@ -46,10 +46,6 @@ android {
 		jvmTarget = Config.Sample.javaVersion.toString()
 	}
 
-	lint {
-		abortOnError = false
-	}
-
 	testOptions {
 		unitTests.apply {
 			isReturnDefaultValues = true
