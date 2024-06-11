@@ -19,36 +19,32 @@ import org.jetbrains.dokka.versioning.VersioningPlugin
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-
-    repositories {
-        google()
-        mavenCentral()
-    }
     dependencies {
-        classpath(Libs.com_android_tools_build_gradle)
-        classpath(Libs.kotlin_gradle_plugin)
-        classpath(Libs.hilt_android_gradle_plugin)
-        classpath(Libs.navigation_safe_args_gradle_plugin)
-        classpath(Libs.versioning_plugin)
+        classpath(libs.versioning.plugin)
     }
 }
 dependencies {
-    dokkaHtmlMultiModulePlugin(Libs.versioning_plugin)
+    dokkaHtmlMultiModulePlugin(libs.versioning.plugin)
 }
 
 plugins {
-    id(Plugins.detekt).version(Libs.io_gitlab_arturbosch_detekt_gradle_plugin)
-    id(Plugins.dokka).version(Libs.org_jetbrains_dokka_gradle_plugin)
-    id(Plugins.gradleNexusPublishing).version(Libs.io_github_gradle_nexus_publish_plugin_gradle_plugin)
-}
+    alias(libs.plugins.com.google.firebase.crashlytics) apply false
+    alias(libs.plugins.com.google.firebase.appdistribution) apply false
+    alias(libs.plugins.com.google.gms.google.services) apply false
+    alias(libs.plugins.androidx.navigation.safeargs) apply false
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jitpack()
-        mavenLocal()
-    }
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.com.google.dagger.hilt.android) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.android.junit5) apply false
+    alias(libs.plugins.jetbrains.kotlin.jvm) apply false
+
+    alias(libs.plugins.io.gitlab.arturbosch.detekt)
+    alias(libs.plugins.gradle.nexus.publish.plugin)
+    alias(libs.plugins.org.jetbrains.dokka)
 }
 
 version = Config.Bom.version
@@ -56,7 +52,7 @@ version = Config.Bom.version
 apply(from = Config.Domain.publishingRoot)
 
 tasks.wrapper {
-    gradleVersion = "7.5.1"
+    gradleVersion = "8.4.1"
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -67,7 +63,7 @@ tasks.withType<KotlinCompile>().all {
 }
 
 tasks.register("clean", Delete::class) {
-    delete(rootProject.buildDir)
+    delete(rootProject.layout.buildDirectory)
 }
 
 tasks.dokkaHtmlMultiModule {

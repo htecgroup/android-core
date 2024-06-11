@@ -17,7 +17,7 @@
 apply plugin: "io.gitlab.arturbosch.detekt"
 
 dependencies {
-	detektPlugins Libs.detekt_formatting
+	detektPlugins libs.detekt.formatting
 }
 
 detekt {

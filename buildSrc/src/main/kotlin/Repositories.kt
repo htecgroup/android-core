@@ -26,3 +26,5 @@ object Repositories {
 
 fun RepositoryHandler.jitpack(): MavenArtifactRepository =
 	maven { setUrl(Repositories.jitpack) }
+fun RepositoryHandler.sonatypeSnapshot(): MavenArtifactRepository =
+	maven { setUrl(Repositories.snapshotsRepository) }

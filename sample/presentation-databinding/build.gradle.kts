@@ -15,43 +15,35 @@
  */
 
 plugins {
-	id(Plugins.androidLibrary)
-	kotlin(Plugins.android)
-	kotlin(Plugins.kapt)
-	id(Plugins.junit5)
-	id(Plugins.hilt)
-	id(Plugins.kotlinParcelize)
-	id(Plugins.androidxNavigationSafeargs)
+	alias(libs.plugins.android.library)
+	alias(libs.plugins.jetbrains.kotlin.android)
+	alias(libs.plugins.org.jetbrains.kotlin.kapt)
+	alias(libs.plugins.com.google.dagger.hilt.android)
+	alias(libs.plugins.kotlin.parcelize)
+	alias(libs.plugins.android.junit5)
+	alias(libs.plugins.androidx.navigation.safeargs)
 }
 
-apply(from = Config.CoreSample.detekt)
+apply(from = Config.Sample.detekt)
 
 android {
-	compileSdk = Config.CoreSample.compileSdkVersion
+
+	namespace = "${Config.Sample.applicationId}.presentation"
+	compileSdk = Config.Sample.compileSdkVersion
 
 	defaultConfig {
-		minSdk = Config.CoreSample.minSdkVersion
-		targetSdk = Config.CoreSample.targetSdkVersion
-		testInstrumentationRunner = Config.CoreSample.instrumentationRunner
+		minSdk = Config.Sample.minSdkVersion
+		testInstrumentationRunner = Config.Sample.instrumentationRunner
 		consumerProguardFiles("consumer-rules.pro")
 	}
 
-	buildTypes {
-		getByName(Config.CoreSample.release) {
-			isMinifyEnabled = Config.CoreSample.minifyEnabled
-			proguardFiles(
-				getDefaultProguardFile("proguard-android-optimize.txt"),
-				"proguard-rules.pro"
-			)
-		}
-	}
 	compileOptions {
-		sourceCompatibility = Config.CoreSample.javaVersion
-		targetCompatibility = Config.CoreSample.javaVersion
+		sourceCompatibility = Config.Sample.javaVersion
+		targetCompatibility = Config.Sample.javaVersion
 	}
 
 	kotlinOptions {
-		jvmTarget = Config.CoreSample.javaVersion.toString()
+		jvmTarget = Config.Sample.javaVersion.toString()
 	}
 
 	lint {
@@ -73,49 +65,48 @@ android {
 
 dependencies {
 
-	api(platform(Libs.bom))
-	api(Libs.presentation_databinding)
+	api(project(Config.PresentationDatabinding.moduleName))
 
-	implementation(project(Config.Module.domain))
+	implementation(project(Config.Sample.Module.domain))
 
 	// Hilt
-	implementation(Libs.hilt_android)
-	kapt(Libs.hilt_android_compiler)
+	implementation(libs.dagger.hilt)
+	kapt(libs.dagger.hilt.compiler)
 
 
-	implementation(Libs.constraintlayout)
+	implementation(libs.androidx.constraintlayout)
 
-	implementation(Libs.play_services_ads)
+	implementation(libs.play.services.ads)
 
-	implementation(Libs.work_runtime_ktx)
+	implementation(libs.androidx.work.runtime.ktx)
 
-	implementation(Libs.swiperefreshlayout)
+	implementation(libs.androidx.swiperefreshlayout)
 
 	// Test
-	testImplementation(Libs.test)
-	testImplementation(Libs.robolectric)
-	testImplementation(Libs.core_testing)
-	testImplementation(Libs.core_ktx)
-	testImplementation(Libs.kotlinx_coroutines_test)
-	testImplementation(Libs.junit_ktx)
-	testImplementation(Libs.mockk)
-	testImplementation(Libs.kluent_android)
+	testImplementation(project(Config.Test.moduleName))
+	testImplementation(libs.robolectric)
+	testImplementation(libs.androidx.core.testing)
+	testImplementation(libs.core.ktx)
+	testImplementation(libs.kotlinx.coroutines.test)
+	testImplementation(libs.androidx.junit.ktx)
+	testImplementation(libs.mockk)
+	testImplementation(libs.kluent.android)
 
 	// (Required) Writing and executing Unit Tests on the JUnit Platform
-	testImplementation(Libs.junit_jupiter_api)
-	testRuntimeOnly(Libs.junit_jupiter_engine)
+	testImplementation(libs.junit.jupiter.api)
+	testImplementation(libs.junit.jupiter.engine)
 
 	// (Optional) If you need "Parameterized Tests"
-	testImplementation(Libs.junit_jupiter_params)
+	testImplementation(libs.junit.jupiter.params)
 
 	// (Optional) If you also have JUnit 4-based tests
 	//testImplementation(Libs.junit)
-	testRuntimeOnly(Libs.junit_vintage_engine)
+	testRuntimeOnly(libs.junit.vintage.engine)
 
 	// Android Test
 
-	androidTestImplementation(Libs.androidx_test_runner)
-	androidTestImplementation(Libs.androidx_test_rules)
-	androidTestImplementation(Libs.espresso_core)
-	androidTestImplementation(Libs.espresso_contrib)
+	androidTestImplementation(libs.androidx.runner)
+	androidTestImplementation(libs.androidx.rules)
+	androidTestImplementation(libs.androidx.espresso.core)
+	androidTestImplementation(libs.androidx.espresso.contrib)
 }

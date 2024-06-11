@@ -14,17 +14,50 @@
  * limitations under the License.
  */
 
-plugins {
-	// See https://jmfayard.github.io/refreshVersions
-	id("de.fayard.refreshVersions") version "0.51.0"
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+        maven { setUrl("https://jitpack.io") }
+        maven { setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
+//        sonatypeSnapshot()
+//        jitpack()
+        mavenLocal()
+    }
 }
 
-refreshVersions {
-	enableBuildSrcLibs()
-	rejectVersionIf {
-		candidate.stabilityLevel.isLessStableThan(current.stabilityLevel)
-	}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
+        maven { setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
+        //        sonatypeSnapshot()
+        //        jitpack()
+        mavenLocal()
+    }
 }
 
-include(":domain", ":data", ":presentation", ":presentation-databinding", ":test", ":bom")
+include(
+    ":domain",
+    ":data",
+    ":presentation",
+    ":presentation-databinding",
+    ":test",
+    ":bom",
+    ":sample:app",
+    ":sample:data",
+    ":sample:domain",
+    ":sample:presentation",
+    ":sample:presentation-databinding"
+)
+
 System.setProperty("rootDir", rootDir.toString())

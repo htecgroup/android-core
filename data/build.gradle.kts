@@ -15,20 +15,21 @@
  */
 
 plugins {
-    id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    id(Plugins.dokka)
-    id(Plugins.mavenPublish)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.dokka)
+
+    id("maven-publish")
 }
 
 apply(from = Config.Data.detekt)
 
 android {
+    namespace = Config.Data.namespace
     compileSdk = Config.Data.compileSdkVersion
 
     defaultConfig {
         minSdk = Config.Data.minSdkVersion
-        targetSdk = Config.Data.targetSdkVersion
         testInstrumentationRunner = Config.Data.instrumentationRunner
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -41,12 +42,13 @@ android {
 
 dependencies {
     implementation(project(Config.Domain.moduleName))
-    implementation(Libs.kotlinx_coroutines_android)
-    api(Libs.retrofit)
-    api(Libs.converter_moshi)
-    api(Libs.moshi_kotlin)
 
-    dokkaHtmlPartialPlugin(Libs.versioning_plugin)
+    implementation(libs.kotlinx.coroutines.android)
+    api(libs.retrofit)
+    api(libs.converter.moshi)
+    api(libs.moshi.kotlin)
+
+    dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.Data, android.sourceSets["main"].java.srcDirs)

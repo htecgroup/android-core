@@ -1,0 +1,123 @@
+[versions]
+accompanistSwiperefresh = "0.30.1"
+agp = "8.4.1"
+appcompat = "1.6.1"
+compiler = "1.4.4"
+constraintlayout = "2.1.4"
+converterMoshi = "2.9.0"
+coreKtxVersion = "1.5.0"
+coreTesting = "2.2.0"
+junitJupiter = "5.9.2"
+junitVintageEngine = "5.9.2"
+kluentAndroid = "1.72"
+kotlin = "1.8.10"
+coreKtx = "1.5.0"
+junit = "1.1.5"
+espresso = "3.5.1"
+kotlinxCoroutines = "1.6.4"
+activityCompose = "1.7.0"
+lifecycleViewmodelCompose = "2.6.1"
+daggerHilt = "2.45"
+hiltNavigationCompose = "1.0.0"
+junit5 = "1.8.2.1"
+dokka = "1.8.10"
+detekt = "1.22.0"
+gradleNexus = "1.3.0"
+googleServices = "4.3.15"
+firebaseAppDistribution = "4.0.0"
+firebaseCrashlytics = "2.9.4"
+moshiKotlinCodegen = "1.14.0"
+okhttp3 = "4.10.0"
+mockk = "1.13.4"
+moshiKotlin = "1.14.0"
+multidex = "2.0.1"
+navigationFragmentKtx = "2.5.3"
+navigationSafeArgsGradlePlugin = "2.5.3"
+playServicesAds = "22.0.0"
+recyclerview = "1.3.0"
+retrofit = "2.9.0"
+robolectric = "4.9.2"
+room = "2.5.1"
+runner = "1.5.2"
+runtime = "1.4.0"
+swiperefreshlayout = "1.1.0"
+uiTooling = "1.4.1"
+uiToolingPreview = "1.4.1"
+versioningPlugin = "1.8.10"
+material3 = "1.0.1"
+firebaseBom = "31.4.0"
+workRuntimeKtx = "2.8.1"
+detektFormatting = "1.22.0"
+
+[libraries]
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compiler" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
+androidx-junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junit" }
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationFragmentKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-rules = { module = "androidx.test:rules", version.ref = "coreKtxVersion" }
+androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
+androidx-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "runtime" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
+core-ktx = { module = "androidx.test:core-ktx", version.ref = "coreKtxVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitJupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiter" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junitJupiter" }
+junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junitVintageEngine" }
+kluent-android = { module = "org.amshove.kluent:kluent-android", version.ref = "kluentAndroid" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
+moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTooling" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
+versioning-plugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "versioningPlugin" }
+firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
+firebase-crashlytics-ktx = {group = "com.google.firebase", name = "firebase-crashlytics-ktx"}
+firebase-analytics-ktx = {group = "com.google.firebase", name = "firebase-analytics-ktx"}
+firebase-messaging-ktx = {group = "com.google.firebase", name = "firebase-messaging-ktx"}
+detekt-formatting = {group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detektFormatting"}
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+com-google-dagger-hilt-android = {id = "com.google.dagger.hilt.android", version.ref = "daggerHilt"}
+org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+android-junit5 = {id ="de.mannodermaus.android-junit5", version.ref = "junit5" }
+org-jetbrains-dokka = {id = "org.jetbrains.dokka", version.ref = "dokka"}
+io-gitlab-arturbosch-detekt = {id = "io.gitlab.arturbosch.detekt", version.ref = "detekt"}
+gradle-nexus-publish-plugin = {id = "io.github.gradle-nexus.publish-plugin", version.ref = "gradleNexus"}
+com-google-gms-google-services = {id = "com.google.gms.google-services", version.ref = "googleServices"}
+com-google-firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution"}
+com-google-firebase-crashlytics = {id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics"}
+androidx-navigation-safeargs = {id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationSafeArgsGradlePlugin"}
+

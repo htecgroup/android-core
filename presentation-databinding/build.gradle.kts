@@ -15,24 +15,24 @@
  */
 
 plugins {
-    id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    kotlin(Plugins.android)
-    kotlin(Plugins.kapt)
-    id(Plugins.hilt)
-    id(Plugins.androidxNavigationSafeargs)
-    id(Plugins.dokka)
-    id(Plugins.mavenPublish)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.org.jetbrains.dokka)
+    alias(libs.plugins.androidx.navigation.safeargs)
+
+    id("maven-publish")
 }
 
 apply(from = Config.PresentationDatabinding.detekt)
 
 android {
+    namespace = Config.PresentationDatabinding.namespace
     compileSdk = Config.PresentationDatabinding.compileSdkVersion
 
     defaultConfig {
         minSdk = Config.PresentationDatabinding.minSdkVersion
-        targetSdk = Config.PresentationDatabinding.targetSdkVersion
     }
 
     compileOptions {
@@ -45,14 +45,15 @@ android {
 }
 
 dependencies {
-    api(AndroidX.recyclerView)
-    api(AndroidX.navigation.fragmentKtx)
-    api(AndroidX.navigation.uiKtx)
-    api(AndroidX.multidex)
-    implementation(Libs.hilt_android)
-    kapt(Libs.hilt_android_compiler)
+    api(libs.androidx.recyclerview)
+    api(libs.androidx.navigation.fragment.ktx)
+    api(libs.androidx.navigation.ui.ktx)
+    api(libs.androidx.multidex)
 
-    dokkaHtmlPartialPlugin(Libs.versioning_plugin)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+
+    dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.PresentationDatabinding, android.sourceSets["main"].java.srcDirs)

@@ -13,27 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import de.fayard.refreshVersions.core.versionFor
-
 plugins {
-    id(Plugins.androidLibrary)
-    id(Plugins.kotlinAndroid)
-    kotlin(Plugins.android)
-    kotlin(Plugins.kapt)
-    id(Plugins.hilt)
-    id(Plugins.dokka)
-    id(Plugins.mavenPublish)
+
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.org.jetbrains.dokka)
+    id("maven-publish")
 }
 
 apply(from = Config.Presentation.detekt)
 
 android {
+    namespace = Config.Presentation.namespace
     compileSdk = Config.Presentation.compileSdkVersion
 
     defaultConfig {
         minSdk = Config.Presentation.minSdkVersion
-        targetSdk = Config.Presentation.targetSdkVersion
     }
 
     compileOptions {
@@ -45,28 +42,24 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = versionFor(Libs.androidx_compose_compiler_compiler)
+        kotlinCompilerExtensionVersion = libs.versions.compiler.get()
     }
 }
 
 dependencies {
-    implementation(Libs.hilt_android)
-    implementation(Libs.hilt_navigation_compose)
-    kapt(Libs.hilt_android_compiler)
-    kapt(Libs.hilt_compiler)
+    implementation(libs.dagger.hilt)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.compiler)
+    //    kapt(Libs.hilt_compiler)
 
-    kapt(Libs.androidx_compose_compiler_compiler)
-    implementation(Libs.androidx_compose_runtime_runtime)
-    implementation(Libs.activity_compose)
-    implementation(Libs.material3)
-    api(Libs.appcompat)
-    api(Libs.multidex)
+    kapt(libs.androidx.compiler)
+    implementation(libs.androidx.runtime)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.material3)
+    api(libs.androidx.appcompat)
+    api(libs.androidx.multidex)
 
-    dokkaHtmlPartialPlugin(Libs.versioning_plugin)
-}
-
-repositories {
-    mavenCentral()
+    dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.Presentation, android.sourceSets["main"].java.srcDirs)

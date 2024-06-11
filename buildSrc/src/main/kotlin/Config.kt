@@ -22,7 +22,6 @@ object Config {
     abstract class Core : MavenPublishingConfig {
         val compileSdkVersion = 31
         val minSdkVersion = 21
-        val targetSdkVersion = 31
         val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val release = "release"
         val debug = "debug"
@@ -30,6 +29,7 @@ object Config {
         val publishingRoot = "scripts/publishing-root.gradle"
         override val group = "com.htecgroup.androidcore"
         val javaVersion = JavaVersion.VERSION_17
+        open val namespace: String get() = "${group}.${artifactId}"
         abstract val moduleName: String
         override val version: String get() = VersionProperties(this).version
         override val skipPublishing: Boolean get() = VersionProperties(this).skipPublishing
@@ -67,6 +67,7 @@ object Config {
         override val configName = "PresentationDatabinding"
         override val artifactId = "presentation-databinding"
         override val moduleName = ":presentation-databinding"
+        override val namespace = "${group}.presentation"
         override val description = "A set of base classes for creating UI primarily based on Data Binding."
     }
 
@@ -75,5 +76,41 @@ object Config {
         override val artifactId = "test"
         override val moduleName = ":test"
         override val description = "A set of classes wich contain some basic setup for testing."
+    }
+
+    object Sample {
+        const val applicationId = "com.htecgroup.coresample"
+        const val compileSdkVersion = 33
+        const val minSdkVersion = 21
+        const val targetSdkVersion = 33
+        const val versionCode = 1
+        const val versionName = "1.0.0"
+        const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        const val release = "release"
+        const val debug = "debug"
+        const val minifyEnabled = true
+        const val multiDex = true
+        const val detekt = "../../scripts/detekt.gradle"
+        val javaVersion = JavaVersion.VERSION_17
+
+        object Module {
+            const val presentationDatabinding = ":sample:presentation-databinding"
+            const val presentation = ":sample:presentation"
+            const val domain = ":sample:domain"
+            const val data = ":sample:data"
+            const val test = ":sample:test"
+        }
+
+        object FirebaseDistribution {
+            const val groups = "htec"
+            const val releaseNotesFile = "./app/release-notes.txt"
+            const val serviceCredentialsFile = "./app/core-sample-firebase.json"
+        }
+
+        object Dev {
+            const val name = "dev"
+            const val dimension = "core"
+            const val appIdSuffix = ".dev"
+        }
     }
 }

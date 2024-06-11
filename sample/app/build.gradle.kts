@@ -15,35 +15,37 @@
  */
 
 plugins {
-    id(Plugins.androidApplication)
-    kotlin(Plugins.android)
-    kotlin(Plugins.kapt)
-    id(Plugins.hilt)
-    id(Plugins.firebaseCrashlytics)
-    id(Plugins.firebaseAppDistribution)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.com.google.firebase.crashlytics)
+    alias(libs.plugins.com.google.firebase.appdistribution)
+    alias(libs.plugins.com.google.gms.google.services)
 }
 
-apply(from = Config.CoreSample.detekt)
+apply(from = Config.Sample.detekt)
 
 android {
-    compileSdk = Config.CoreSample.compileSdkVersion
+    namespace = "${Config.Sample.applicationId}.app"
+    compileSdk = Config.Sample.compileSdkVersion
 
     defaultConfig {
-        applicationId = Config.CoreSample.applicationId
-        minSdk = Config.CoreSample.minSdkVersion
-        targetSdk = Config.CoreSample.targetSdkVersion
+        applicationId = Config.Sample.applicationId
+        minSdk = Config.Sample.minSdkVersion
+        targetSdk = Config.Sample.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = Config.CoreSample.instrumentationRunner
-        multiDexEnabled = Config.CoreSample.multiDex
+        testInstrumentationRunner = Config.Sample.instrumentationRunner
+        multiDexEnabled = Config.Sample.multiDex
     }
 
     signingConfigs {
 
         Signing.loadReleaseProperties(project)
 
-        create(Config.CoreSample.release) {
+        create(Config.Sample.release) {
             if (Signing.keystoreProperties.isNotEmpty()) {
                 keyAlias = Signing.keyAlias
                 keyPassword = Signing.keyPassword
@@ -54,64 +56,59 @@ android {
     }
 
     buildTypes {
-        getByName(Config.CoreSample.release) {
-            isMinifyEnabled = Config.CoreSample.minifyEnabled
+        getByName(Config.Sample.release) {
+            isMinifyEnabled = Config.Sample.minifyEnabled
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName(Config.CoreSample.release)
+            signingConfig = signingConfigs.getByName(Config.Sample.release)
         }
-        getByName(Config.CoreSample.debug) {
+        getByName(Config.Sample.debug) {
             firebaseAppDistribution {
-                groups = Config.FirebaseDistribution.groups
-                releaseNotesFile = Config.FirebaseDistribution.releaseNotesFile
-                serviceCredentialsFile = Config.FirebaseDistribution.serviceCredentialsFile
+                groups = Config.Sample.FirebaseDistribution.groups
+                releaseNotesFile = Config.Sample.FirebaseDistribution.releaseNotesFile
+                serviceCredentialsFile = Config.Sample.FirebaseDistribution.serviceCredentialsFile
             }
         }
     }
     compileOptions {
-        sourceCompatibility = Config.CoreSample.javaVersion
-        targetCompatibility = Config.CoreSample.javaVersion
+        sourceCompatibility = Config.Sample.javaVersion
+        targetCompatibility = Config.Sample.javaVersion
     }
 
     kotlinOptions {
-        jvmTarget = Config.CoreSample.javaVersion.toString()
+        jvmTarget = Config.Sample.javaVersion.toString()
     }
 
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
-    implementation(project(Config.Module.domain))
-    implementation(project(Config.Module.data))
+    implementation(project(Config.Sample.Module.domain))
+    implementation(project(Config.Sample.Module.data))
     /**
      * #DataBindingSample
      * Change with the following line to enable databinding example
-     * implementation(project(Config.Module.presentationDatabinding))
+     * implementation(project(Config.Sample.Module.presentationDatabinding))
      */
-    implementation(project(Config.Module.presentation))
+    implementation(project(Config.Sample.Module.presentation))
 
     // Hilt
-    implementation(Libs.hilt_android)
-    kapt(Libs.hilt_android_compiler)
-    kapt(Libs.hilt_compiler)
+    implementation(libs.dagger.hilt)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.compiler)
 
-    implementation(Libs.play_services_ads)
+    implementation(libs.play.services.ads)
 
-    implementation(platform(Libs.firebase_bom))
-    implementation(Libs.firebase_crashlytics_ktx)
-    implementation(Libs.firebase_analytics_ktx)
-    implementation(Libs.firebase_messaging_ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.messaging.ktx)
 
-    implementation(Libs.work_runtime_ktx)
-}
-
-apply(plugin = Plugins.googleServices)
-
-repositories {
-    mavenCentral()
+    implementation(libs.androidx.work.runtime.ktx)
 }
