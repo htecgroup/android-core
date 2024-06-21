@@ -1,7 +1,7 @@
 [versions]
 accompanistSwiperefresh = "0.30.1"
 agp = "8.4.2"
-appcompat = "1.7.0"
+appcompat = "1.6.1"
 compiler = "1.5.2"
 constraintlayout = "2.1.4"
 converterMoshi = "2.9.0"
@@ -111,7 +111,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 com-google-dagger-hilt-android = {id = "com.google.dagger.hilt.android", version.ref = "daggerHilt"}
-#org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 com-google-developers-ksp = {id ="com.google.devtools.ksp", version.ref = "ksp"}
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 android-junit5 = {id ="de.mannodermaus.android-junit5", version.ref = "junit5" }

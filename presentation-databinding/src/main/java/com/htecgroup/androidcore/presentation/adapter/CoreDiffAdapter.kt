@@ -28,8 +28,10 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Base [RecyclerView] adapter implemented using [ListAdapter].
  */
-abstract class CoreDiffAdapter<ItemT>(diffUtilItemCallback: DiffUtil.ItemCallback<ItemT> = getItemDiffCallback()) :
-    ListAdapter<ItemT, BindingViewHolder>(diffUtilItemCallback) {
+abstract class CoreDiffAdapter<ItemT : Any>(
+    diffUtilItemCallback: DiffUtil.ItemCallback<ItemT> =
+        getItemDiffCallback()
+) : ListAdapter<ItemT, BindingViewHolder>(diffUtilItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder =
         BindingViewHolder(

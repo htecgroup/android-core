@@ -17,11 +17,20 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.com.google.developers.ksp)
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.com.google.firebase.crashlytics)
     alias(libs.plugins.com.google.firebase.appdistribution)
     alias(libs.plugins.com.google.gms.google.services)
+
+    /**
+     * #DataBindingSample
+     * There is no support for ksp with databinding (kapt should be used instead).
+     *
+     * Change with the following line to enable databinding example
+     *
+     * alias(libs.plugins.org.jetbrains.kotlin.kapt)
+     */
+    alias(libs.plugins.com.google.developers.ksp)
 }
 
 apply(from = Config.Sample.detekt)
@@ -101,6 +110,12 @@ dependencies {
     // Hilt
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    /**
+     * #DataBindingSample
+     * Change with the following line to enable databinding example
+     * kapt(libs.dagger.hilt.compiler)
+     */
     ksp(libs.dagger.hilt.compiler)
 
     implementation(libs.play.services.ads)

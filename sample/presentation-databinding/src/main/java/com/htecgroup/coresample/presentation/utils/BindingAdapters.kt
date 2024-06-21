@@ -46,7 +46,7 @@ fun bindVisibility(view: View, visibility: String?, setInvisible: Boolean?) {
 
 @Suppress("UNCHECKED_CAST")
 @BindingAdapter(value = ["items"])
-fun <ItemT> bindItems(recyclerView: RecyclerView, items: List<ItemT>?) {
+fun <ItemT : Any> bindItems(recyclerView: RecyclerView, items: List<ItemT>?) {
     val adapter = recyclerView.adapter
     if (adapter is CoreDiffAdapter<*>) {
         (adapter as CoreDiffAdapter<ItemT>).submitList(items ?: ArrayList())

@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.ListAdapter
  * [DiffUtil.ItemCallback] is generic callback used in [ListAdapter].
  */
 @Suppress("WRONG_TYPE_PARAMETER_NULLABILITY_FOR_JAVA_OVERRIDE")
-fun <ItemT> getItemDiffCallback() = object : DiffUtil.ItemCallback<ItemT>() {
+fun <ItemT : Any> getItemDiffCallback() = object : DiffUtil.ItemCallback<ItemT>() {
     override fun areItemsTheSame(oldItem: ItemT, newItem: ItemT): Boolean =
         oldItem === newItem
 
