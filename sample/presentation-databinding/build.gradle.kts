@@ -17,7 +17,7 @@
 plugins {
 	alias(libs.plugins.android.library)
 	alias(libs.plugins.jetbrains.kotlin.android)
-	alias(libs.plugins.org.jetbrains.kotlin.kapt)
+	alias(libs.plugins.com.google.developers.ksp)
 	alias(libs.plugins.com.google.dagger.hilt.android)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.android.junit5)
@@ -71,7 +71,7 @@ dependencies {
 
 	// Hilt
 	implementation(libs.dagger.hilt)
-	kapt(libs.dagger.hilt.compiler)
+	ksp(libs.dagger.hilt.compiler)
 
 
 	implementation(libs.androidx.constraintlayout)

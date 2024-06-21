@@ -18,7 +18,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.dagger.hilt.android)
-    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.com.google.developers.ksp)
     alias(libs.plugins.org.jetbrains.dokka)
     id("maven-publish")
 }
@@ -44,15 +44,19 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compiler.get()
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.navigation.compose)
-    kapt(libs.dagger.hilt.compiler)
-    //    kapt(Libs.hilt_compiler)
+    ksp(libs.dagger.hilt.compiler)
 
-    kapt(libs.androidx.compiler)
+    ksp(libs.androidx.compiler)
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
