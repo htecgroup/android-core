@@ -48,7 +48,11 @@ interface MavenPublishingConfig {
     val description: String
 }
 
-private fun Project.publication(componentName: String, config: MavenPublishingConfig, sourceSet: Set<File>?) {
+private fun Project.publication(
+    componentName: String,
+    config: MavenPublishingConfig,
+    sourceSet: Set<File>?
+) {
     if (config.version.endsWith("LOCAL") || !config.skipPublishing) {
         afterEvaluate {
             extensions.configure("publishing", Action<PublishingExtension> {
@@ -73,12 +77,16 @@ private fun Project.publication(componentName: String, config: MavenPublishingCo
 
                             if (sourceSet != null) {
                                 artifacts {
-                                    artifact(
-                                        project.task<Jar>("androidSourcesJar") {
-                                            archiveClassifier.set("sources")
-                                            from(sourceSet)
-                                        }
-                                    )
+                                    if (artifactId === Config.Domain.artifactId) {
+                                        // for Android modules (AAR), Gradle will automatically
+                                        // create sources jar files in maven repository
+                                        artifact(
+                                            project.task<Jar>("androidSourcesJar") {
+                                                archiveClassifier.set("sources")
+                                                from(sourceSet)
+                                            }
+                                        )
+                                    }
                                     artifact(
                                         project.task<Jar>("javadocJar") {
                                             archiveClassifier.set("javadoc")
@@ -141,11 +149,11 @@ private fun Project.configureSigning() {
     }
 }
 
-fun Project.configureReleasePublication(config: MavenPublishingConfig, sourceSet:Set<File>) {
+fun Project.configureReleasePublication(config: MavenPublishingConfig, sourceSet: Set<File>) {
     publication("release", config, sourceSet)
 }
 
-fun Project.configureJavaPublication(config: MavenPublishingConfig, sourceSet:Set<File>) {
+fun Project.configureJavaPublication(config: MavenPublishingConfig, sourceSet: Set<File>) {
     publication("java", config, sourceSet)
 }
 
