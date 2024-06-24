@@ -72,15 +72,18 @@ dependencies {
 	implementation(project(Config.Sample.Module.domain))
 
 	// Compose
-	implementation(libs.androidx.material3)
 	implementation(libs.androidx.runtime)
 	implementation(libs.androidx.lifecycle.viewmodel.compose)
 	implementation(libs.androidx.hilt.navigation.compose)
 	implementation(libs.androidx.navigation.compose)
 	implementation(libs.androidx.activity.compose)
-	implementation(libs.ui.tooling.preview)
-	implementation(libs.ui.tooling)
-	implementation(libs.accompanist.swiperefresh)
+
+	// Compose BOM
+	implementation(platform(libs.androidx.compose.bom))
+	implementation(libs.androidx.ui)
+	implementation(libs.androidx.ui.tooling.preview)
+	implementation(libs.androidx.ui.tooling)
+	implementation(libs.androidx.material3)
 
 	// Hilt
 	implementation(libs.dagger.hilt)

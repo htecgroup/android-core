@@ -59,9 +59,12 @@ dependencies {
     ksp(libs.androidx.compiler)
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.material3)
     api(libs.androidx.appcompat)
     api(libs.androidx.multidex)
+
+    // Compose BOM
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.material3)
 
     dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }
