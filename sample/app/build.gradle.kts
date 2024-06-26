@@ -25,9 +25,7 @@ plugins {
     /**
      * #DataBindingSample
      * There is no support for ksp with databinding (kapt should be used instead).
-     *
-     * Change with the following line to enable databinding example
-     *
+     * Change with the following line to enable databinding example:
      * alias(libs.plugins.org.jetbrains.kotlin.kapt)
      */
     alias(libs.plugins.com.google.developers.ksp)
