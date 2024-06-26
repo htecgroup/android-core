@@ -53,16 +53,16 @@ private fun Project.publication(
     config: MavenPublishingConfig,
     sourceSet: Set<File>?
 ) {
-    if (config.version.endsWith("LOCAL") || !config.skipPublishing) {
-        afterEvaluate {
-            extensions.configure("publishing", Action<PublishingExtension> {
-                publications {
-                    create(config.configName, MavenPublication::class.java) {
-                        from(components.getByName(componentName))
-                        artifactId = config.artifactId
-                        groupId = config.group
-                        version = config.version
+    afterEvaluate {
+        extensions.configure("publishing", Action<PublishingExtension> {
+            publications {
+                create(config.configName, MavenPublication::class.java) {
+                    from(components.getByName(componentName))
+                    artifactId = config.artifactId
+                    groupId = config.group
+                    version = config.version
 
+                    if (config.version.endsWith("LOCAL") || !config.skipPublishing) {
                         pom {
                             name.set(config.artifactId)
                             description.set(config.description)
@@ -120,16 +120,17 @@ private fun Project.publication(
                                 url.set(MavenPublishingConfig.PUBLISH_SCM_URL)
                             }
                         }
-                    }
 
-                    repositories {
-                        if (config.version.endsWith("LOCAL")) {
-                            mavenLocal { }
-                        }
                     }
                 }
-            })
-        }
+
+                repositories {
+                    if (config.version.endsWith("LOCAL")) {
+                        mavenLocal { }
+                    }
+                }
+            }
+        })
     }
 
     if (!config.version.endsWith("LOCAL")) {

@@ -22,7 +22,12 @@ plugins {
 dependencies {
     constraints {
         project.rootProject.subprojects.forEach { subproject ->
-            if (subproject.name != "bom" && subproject.name != "buildSrc") {
+            if (
+                subproject.name != "bom"
+                && subproject.name != "buildSrc"
+                && !subproject.group.toString().contains("sample")
+                && !subproject.name.contains("sample")
+            ) {
                 api(subproject)
             }
         }
