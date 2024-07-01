@@ -1,8 +1,7 @@
 [versions]
-accompanistSwiperefresh = "0.30.1"
-agp = "8.4.1"
+agp = "8.5.0"
 appcompat = "1.6.1"
-compiler = "1.4.4"
+compiler = "1.5.2"
 constraintlayout = "2.1.4"
 converterMoshi = "2.9.0"
 coreKtxVersion = "1.5.0"
@@ -10,47 +9,45 @@ coreTesting = "2.2.0"
 junitJupiter = "5.9.2"
 junitVintageEngine = "5.9.2"
 kluentAndroid = "1.72"
-kotlin = "1.8.10"
-coreKtx = "1.5.0"
+kotlin = "1.9.0"
+coreKtx = "1.13.1"
 junit = "1.1.5"
 espresso = "3.5.1"
-kotlinxCoroutines = "1.6.4"
-activityCompose = "1.7.0"
-lifecycleViewmodelCompose = "2.6.1"
-daggerHilt = "2.45"
-hiltNavigationCompose = "1.0.0"
+kotlinxCoroutines = "1.7.3"
+activityCompose = "1.9.0"
+lifecycleViewmodelCompose = "2.8.2"
+daggerHilt = "2.49"
+hiltNavigationCompose = "1.2.0"
 junit5 = "1.8.2.1"
 dokka = "1.8.10"
 detekt = "1.22.0"
 gradleNexus = "1.3.0"
-googleServices = "4.3.15"
-firebaseAppDistribution = "4.0.0"
-firebaseCrashlytics = "2.9.4"
+googleServices = "4.4.2"
+firebaseAppDistribution = "5.0.0"
+firebaseCrashlytics = "3.0.2"
 moshiKotlinCodegen = "1.14.0"
-okhttp3 = "4.10.0"
+okhttp3 = "4.11.0"
 mockk = "1.13.4"
 moshiKotlin = "1.14.0"
 multidex = "2.0.1"
-navigationFragmentKtx = "2.5.3"
-navigationSafeArgsGradlePlugin = "2.5.3"
-playServicesAds = "22.0.0"
-recyclerview = "1.3.0"
+navigationFragmentKtx = "2.7.7"
+navigationSafeArgsGradlePlugin = "2.7.7"
+playServicesAds = "23.1.0"
+recyclerview = "1.3.2"
 retrofit = "2.9.0"
 robolectric = "4.9.2"
-room = "2.5.1"
+room = "2.6.1"
 runner = "1.5.2"
-runtime = "1.4.0"
+runtime = "1.6.8"
 swiperefreshlayout = "1.1.0"
-uiTooling = "1.4.1"
-uiToolingPreview = "1.4.1"
 versioningPlugin = "1.8.10"
-material3 = "1.0.1"
-firebaseBom = "31.4.0"
-workRuntimeKtx = "2.8.1"
+firebaseBom = "33.1.1"
+workRuntimeKtx = "2.9.0"
 detektFormatting = "1.22.0"
+ksp = "1.9.0-1.0.12"
+composeBom = "2024.06.00"
 
 [libraries]
-accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compiler" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
@@ -75,7 +72,6 @@ converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.r
 core-ktx = { module = "androidx.test:core-ktx", version.ref = "coreKtxVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
@@ -95,8 +91,12 @@ moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", ver
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTooling" }
-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
 versioning-plugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "versioningPlugin" }
 firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
 firebase-crashlytics-ktx = {group = "com.google.firebase", name = "firebase-crashlytics-ktx"}
@@ -111,6 +111,7 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 com-google-dagger-hilt-android = {id = "com.google.dagger.hilt.android", version.ref = "daggerHilt"}
 org-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+com-google-developers-ksp = {id ="com.google.devtools.ksp", version.ref = "ksp"}
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 android-junit5 = {id ="de.mannodermaus.android-junit5", version.ref = "junit5" }
 org-jetbrains-dokka = {id = "org.jetbrains.dokka", version.ref = "dokka"}

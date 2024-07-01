@@ -17,7 +17,7 @@
 plugins {
 	alias(libs.plugins.android.library)
 	alias(libs.plugins.jetbrains.kotlin.android)
-	alias(libs.plugins.org.jetbrains.kotlin.kapt)
+	alias(libs.plugins.com.google.developers.ksp)
 	alias(libs.plugins.android.junit5)
 	alias(libs.plugins.com.google.dagger.hilt.android)
 }
@@ -65,6 +65,12 @@ android {
 			isIncludeAndroidResources = true
 		}
 	}
+
+	packaging {
+		resources {
+			excludes += "/META-INF/{AL2.0,LGPL2.1}"
+		}
+	}
 }
 
 dependencies {
@@ -74,11 +80,11 @@ dependencies {
 
 	// Hilt
 	implementation(libs.dagger.hilt)
-	kapt(libs.dagger.hilt.compiler)
+	ksp(libs.dagger.hilt.compiler)
 
 	// Room
 	implementation(libs.androidx.room.runtime)
-	kapt(libs.androidx.room.compiler)
+	ksp(libs.androidx.room.compiler)
 	implementation(libs.androidx.room.ktx)
 
 	// Squareup
@@ -91,7 +97,7 @@ dependencies {
 
 	implementation(libs.androidx.work.runtime.ktx)
 
-	kapt(libs.moshi.kotlin.codegen)
+	ksp(libs.moshi.kotlin.codegen)
 
 	// Test
 	testImplementation(project(Config.Test.moduleName))

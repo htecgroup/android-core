@@ -19,7 +19,7 @@ plugins {
 	alias(libs.plugins.android.library)
 	alias(libs.plugins.jetbrains.kotlin.android)
 	alias(libs.plugins.com.google.dagger.hilt.android)
-	alias(libs.plugins.org.jetbrains.kotlin.kapt)
+	alias(libs.plugins.com.google.developers.ksp)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.android.junit5)
 }
@@ -60,6 +60,11 @@ android {
 	composeOptions {
 		kotlinCompilerExtensionVersion = libs.versions.compiler.get()
 	}
+	packaging {
+		resources {
+			excludes += "/META-INF/{AL2.0,LGPL2.1}"
+		}
+	}
 }
 
 dependencies {
@@ -67,19 +72,22 @@ dependencies {
 	implementation(project(Config.Sample.Module.domain))
 
 	// Compose
-	implementation(libs.androidx.material3)
 	implementation(libs.androidx.runtime)
 	implementation(libs.androidx.lifecycle.viewmodel.compose)
 	implementation(libs.androidx.hilt.navigation.compose)
 	implementation(libs.androidx.navigation.compose)
 	implementation(libs.androidx.activity.compose)
-	implementation(libs.ui.tooling.preview)
-	implementation(libs.ui.tooling)
-	implementation(libs.accompanist.swiperefresh)
+
+	// Compose BOM
+	implementation(platform(libs.androidx.compose.bom))
+	implementation(libs.androidx.ui)
+	implementation(libs.androidx.ui.tooling.preview)
+	implementation(libs.androidx.ui.tooling)
+	implementation(libs.androidx.material3)
 
 	// Hilt
 	implementation(libs.dagger.hilt)
-	kapt(libs.dagger.hilt.compiler)
+	ksp(libs.dagger.hilt.compiler)
 
 	implementation(libs.play.services.ads)
 
