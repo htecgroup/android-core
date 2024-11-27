@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.6.1"
 appcompat = "1.6.1"
 compiler = "1.5.2"
 constraintlayout = "2.1.4"
