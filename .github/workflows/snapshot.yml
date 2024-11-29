@@ -44,6 +44,9 @@ jobs:
         run: |
           mkdir ./signing
           echo ${{ secrets.SIGNING_KEY }} | base64 --decode > ./signing/SecretRingKey.gpg
+          mkdir ./sample/app/signing
+          echo ${{ secrets.KEYSTORE_PROPERTIES }} | base64 --decode > ./sample/app/signing/keystore.properties
+          echo ${{ secrets.RELEASE_KEYSTORE }} | base64 --decode > ./sample/app/signing/release-keystore.jks
 
       - name: Build release
         run: ./gradlew assembleRelease
