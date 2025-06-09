@@ -64,7 +64,7 @@ class PostListDestinationComposer @Inject constructor() : DestinationComposer<Po
     ) {
         DefaultTopBar(
             titleResId = titleResId,
-            topAppBarColors = TopAppBarDefaults.smallTopAppBarColors(
+            topAppBarColors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primary,
                 titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 actionIconContentColor = MaterialTheme.colorScheme.onPrimary,

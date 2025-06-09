@@ -22,6 +22,7 @@ plugins {
 	alias(libs.plugins.com.google.developers.ksp)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.android.junit5)
+	alias(libs.plugins.compose.compiler)
 }
 
 apply(from = Config.Sample.detekt)

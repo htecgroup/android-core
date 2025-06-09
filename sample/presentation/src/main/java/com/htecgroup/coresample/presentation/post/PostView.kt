@@ -36,7 +36,7 @@ fun PostView.toPost() = Post(id, title.lowercase(Locale.getDefault()), descripti
 
 fun Post.toPostView() = PostView(
     id,
-    title = if (title.isNotEmpty()) title.toUpperCase(Locale.getDefault()) else "--",
-    description = if (description.isNotEmpty()) description else "--",
+    title = if (title.isNotEmpty()) title.uppercase(Locale.getDefault()) else "--",
+    description = description.ifEmpty { "--" },
     user = user?.toUserView()
 )

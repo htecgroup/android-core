@@ -20,6 +20,7 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.com.google.developers.ksp)
     alias(libs.plugins.org.jetbrains.dokka)
+    alias(libs.plugins.compose.compiler)
     id("maven-publish")
 }
 
