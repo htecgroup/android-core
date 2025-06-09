@@ -57,12 +57,6 @@ tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-tasks.withType<KotlinCompile>().all {
-    kotlinOptions {
-        jvmTarget = Config.Bom.javaVersion.toString()
-    }
-}
-
 tasks.register("clean", Delete::class) {
     delete(rootProject.layout.buildDirectory)
 }
