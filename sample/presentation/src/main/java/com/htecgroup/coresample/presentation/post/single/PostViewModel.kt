@@ -16,34 +16,36 @@
 
 package com.htecgroup.coresample.presentation.post.single
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.htecgroup.androidcore.domain.extension.TAG
 import com.htecgroup.androidcore.domain.extension.collect
 import com.htecgroup.androidcore.domain.extension.mapUnwrapResult
 import com.htecgroup.androidcore.presentation.model.DataUiState.Loading
+import com.htecgroup.androidcore.presentation.viewmodel.AssistedViewModelFactory
 import com.htecgroup.coresample.domain.post.usecase.DeletePost
 import com.htecgroup.coresample.domain.post.usecase.RetrievePost
-import com.htecgroup.coresample.presentation.base.BaseViewModel
+import com.htecgroup.coresample.presentation.base.AssistedBaseViewModel
 import com.htecgroup.coresample.presentation.post.PostView
-import com.htecgroup.coresample.presentation.post.PostsDestinations
 import com.htecgroup.coresample.presentation.post.toPostView
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class PostViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+@HiltViewModel(assistedFactory = PostViewModel.Factory::class)
+class PostViewModel @AssistedInject constructor(
     private val retrievePost: RetrievePost,
-    private val deletePost: DeletePost
-) : BaseViewModel<PostView>() {
+    private val deletePost: DeletePost,
+    @Assisted navKey: PostDetailsDestination,
+) : AssistedBaseViewModel<PostDetailsDestination, PostView>(navKey) {
 
-    val postId = savedStateHandle.get<Int>(PostsDestinations.ArgKeys.ID.name)
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<PostDetailsDestination, PostViewModel>
 
     init {
         uiState = Loading()
-        postId?.let { initPost(it) }
+        initPost(navKey.id)
     }
 
     private fun initPost(postId: Int) {

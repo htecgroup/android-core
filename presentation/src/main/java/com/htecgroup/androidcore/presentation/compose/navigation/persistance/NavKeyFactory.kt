@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package com.htecgroup.androidcore.presentation.compose.navigation
-
-import com.htecgroup.androidcore.presentation.compose.navigation.Action.NavigationAction
-import com.htecgroup.androidcore.presentation.compose.navigation.CommonNavigationAction.Back
-import com.htecgroup.androidcore.presentation.compose.navigation.CommonNavigationAction.Up
+package com.htecgroup.androidcore.presentation.compose.navigation.persistance
 
 /**
- * Represents most common navigation actions like [Back] and [Up].
+ * Factory interface for creating instances of [PersistableNavDestination] from parameters.
+ *
+ * @param T The type of [PersistableNavDestination] this factory creates.
  */
-sealed class CommonNavigationAction : NavigationAction {
-    object Back : CommonNavigationAction()
-    object Up : CommonNavigationAction()
+interface NavKeyFactory<T : PersistableNavDestination> {
+
+    /**
+     * Creates an instance of the destination from the provided parameters.
+     *
+     * @param params A map of parameter keys to their string values.
+     * @return An instance of the destination.
+     */
+    fun fromParams(params: Map<String, String>): T
 }

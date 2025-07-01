@@ -17,12 +17,15 @@
 package com.htecgroup.androidcore.presentation.compose
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.htecgroup.androidcore.presentation.compose.navigation.Destination
 
-sealed class BarButton(
+/**
+ * Represents a button in the top app bar.
+ * Can be reused for "up" buttons, contextual actions or other customization.
+ */
+sealed class TopBarButton(
     open val icon: ImageVector,
     open val contentDescription: String,
     open val action: () -> Unit
@@ -31,17 +34,11 @@ sealed class BarButton(
         override val icon: ImageVector,
         override val contentDescription: String,
         override val action: () -> Unit
-    ) : BarButton(icon, contentDescription, action)
+    ) : TopBarButton(icon, contentDescription, action)
 
     data class BackButton(override val action: () -> Unit) :
-        BarButton(Icons.Filled.ArrowBack, "Back", action)
+        TopBarButton(Icons.AutoMirrored.Filled.ArrowBack, "Back", action)
 
     data class AddButton(override val action: () -> Unit) :
-        BarButton(Icons.Filled.Add, "Add", action)
-
-    data class ScreenButton(
-        override val icon: ImageVector,
-        override val contentDescription: String,
-        val destination: Destination
-    ) : BarButton(icon, contentDescription, {})
+        TopBarButton(Icons.Filled.Add, "Add", action)
 }

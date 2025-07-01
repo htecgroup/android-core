@@ -30,6 +30,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -37,15 +38,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.htecgroup.androidcore.presentation.model.DataUiState
+import com.htecgroup.androidcore.presentation.model.DataUiState.Idle
+import com.htecgroup.coresample.domain.post.Post
 import com.htecgroup.coresample.presentation.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddPostScreen(
+    uiState: DataUiState<Post>,
     title: MutableState<String>,
     body: MutableState<String>,
-    onSaveClick: () -> Unit
+    onSaveClick: () -> Unit,
+    onBack: () -> Unit
 ) {
+    if (uiState.data == null) {
+        LaunchedEffect(Unit) {
+            onBack()
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -95,8 +107,10 @@ fun AddPostScreen(
 @Composable
 private fun AddPostScreenPreview() {
     AddPostScreen(
+        uiState = Idle(),
         title = mutableStateOf("Title"),
         body = mutableStateOf("Body"),
-        onSaveClick = {}
+        onSaveClick = {},
+        onBack = {}
     )
 }

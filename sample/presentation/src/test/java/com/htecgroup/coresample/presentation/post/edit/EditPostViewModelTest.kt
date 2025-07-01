@@ -19,7 +19,6 @@
 package com.htecgroup.coresample.presentation.post.edit
 
 import android.content.res.Resources
-import androidx.lifecycle.SavedStateHandle
 import com.htecgroup.androidcore.test.CoreViewModelTest
 import com.htecgroup.coresample.domain.post.Post
 import com.htecgroup.coresample.domain.post.usecase.RetrievePost
@@ -34,14 +33,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import org.amshove.kluent.shouldBeEmpty
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal class EditPostViewModelTest : CoreViewModelTest() {
-    @MockK
-    lateinit var savedStateHandle: SavedStateHandle
 
     @MockK
     lateinit var retrievePost: RetrievePost
@@ -52,6 +48,9 @@ internal class EditPostViewModelTest : CoreViewModelTest() {
     @MockK
     lateinit var resources: Resources
 
+    @MockK
+    lateinit var destination: EditPostDestination
+
     lateinit var sut: EditPostViewModel
 
     val postEntry = Post(id = 1, title = "T", description = "D")
@@ -59,9 +58,9 @@ internal class EditPostViewModelTest : CoreViewModelTest() {
     @BeforeEach
     internal fun setUp() {
         MockKAnnotations.init(this)
-        every { savedStateHandle.get<Int>(any()) } returns 1
         coEvery { retrievePost.invoke(1) } returns flowOf(Result.success(postEntry))
-        sut = EditPostViewModel(savedStateHandle, retrievePost, updatePost, resources)
+        every { destination.id } returns 1
+        sut = EditPostViewModel(retrievePost, updatePost, resources, destination)
     }
 
     @Test

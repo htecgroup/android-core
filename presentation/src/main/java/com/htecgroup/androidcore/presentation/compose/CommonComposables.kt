@@ -31,8 +31,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -56,7 +54,7 @@ fun AnimateSlide(
 
 @Composable
 fun AnimateFade(
-    visible: Boolean,
+    visible: Boolean = true,
     content: @Composable AnimatedVisibilityScope.() -> Unit
 ) {
     AnimatedVisibility(
@@ -71,55 +69,31 @@ fun AnimateFade(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DefaultTopBar(
-    titleResId: Int,
+    titleResId: Int?,
     topAppBarColors: TopAppBarColors,
     modifier: Modifier = Modifier,
     textAlign: TextAlign = TextAlign.Start,
     titleTextStyle: TextStyle = MaterialTheme.typography.titleLarge,
-    upButton: State<BarButton?>? = null,
-    contextButton: State<BarButton?>? = null
-) {
-    DefaultTopBar(
-        title = stringResource(id = titleResId),
-        topAppBarColors = topAppBarColors,
-        modifier = modifier,
-        textAlign = textAlign,
-        titleTextStyle = titleTextStyle,
-        upButton = upButton,
-        contextButton = contextButton
-    )
-}
-
-@Suppress("LongParameterList")
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DefaultTopBar(
-    title: String,
-    topAppBarColors: TopAppBarColors,
-    modifier: Modifier = Modifier,
-    textAlign: TextAlign = TextAlign.Start,
-    titleTextStyle: TextStyle = MaterialTheme.typography.titleLarge,
-    upButton: State<BarButton?>? = null,
-    contextButton: State<BarButton?>? = null
+    upButton: TopBarButton? = null,
+    contextButton: TopBarButton? = null
 ) {
     TopAppBar(
         modifier = modifier,
         colors = topAppBarColors,
-        navigationIcon = { upButton?.let { Up(it) } },
+        navigationIcon = {
+            upButton?.let { Up(it) }
+        },
         actions = {
-            contextButton?.value?.run {
+            contextButton?.run {
                 IconButton(onClick = action) {
-                    Icon(
-                        icon,
-                        contentDescription,
-                    )
+                    Icon(icon, contentDescription)
                 }
             }
         },
         title = {
             Text(
                 modifier = modifier.then(Modifier.fillMaxWidth()),
-                text = title,
+                text = titleResId?.let { stringResource(id = titleResId) } ?: "",
                 textAlign = textAlign,
                 style = titleTextStyle,
                 fontWeight = FontWeight.Medium
@@ -129,14 +103,8 @@ fun DefaultTopBar(
 }
 
 @Composable
-fun Up(topBarButton: State<BarButton?>) {
-    val up by topBarButton
-    up?.let {
-        IconButton(it.action) {
-            Icon(
-                imageVector = it.icon,
-                contentDescription = it.contentDescription
-            )
-        }
+fun Up(button: TopBarButton) {
+    IconButton(onClick = button.action) {
+        Icon(button.icon, button.contentDescription)
     }
 }

@@ -18,38 +18,40 @@ package com.htecgroup.coresample.presentation.post.edit
 
 import android.content.res.Resources
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.htecgroup.androidcore.domain.extension.mapUnwrapResult
 import com.htecgroup.androidcore.presentation.model.DataUiState.Loading
+import com.htecgroup.androidcore.presentation.viewmodel.AssistedViewModelFactory
 import com.htecgroup.coresample.domain.post.usecase.RetrievePost
 import com.htecgroup.coresample.domain.post.usecase.UpdatePost
 import com.htecgroup.coresample.presentation.R
-import com.htecgroup.coresample.presentation.base.BaseViewModel
+import com.htecgroup.coresample.presentation.base.AssistedBaseViewModel
 import com.htecgroup.coresample.presentation.post.PostView
-import com.htecgroup.coresample.presentation.post.PostsDestinations
 import com.htecgroup.coresample.presentation.post.toPost
 import com.htecgroup.coresample.presentation.post.toPostView
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class EditPostViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+@HiltViewModel(assistedFactory = EditPostViewModel.Factory::class)
+class EditPostViewModel @AssistedInject constructor(
     private val retrievePost: RetrievePost,
     private val updatePost: UpdatePost,
-    private val resources: Resources
-) : BaseViewModel<PostView>() {
+    private val resources: Resources,
+    @Assisted navKey: EditPostDestination
+) : AssistedBaseViewModel<EditPostDestination, PostView>(navKey) {
+
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<EditPostDestination, EditPostViewModel>
 
     val postTitle = mutableStateOf("")
     val postBody = mutableStateOf("")
 
-    private val postId = savedStateHandle.get<Int>(PostsDestinations.ArgKeys.ID.name)
-
     init {
-        postId?.let { initPost(it) }
+        initPost(navKey.id)
     }
 
     private fun initPost(postId: Int) {

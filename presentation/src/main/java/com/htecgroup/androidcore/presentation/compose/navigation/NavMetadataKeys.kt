@@ -16,25 +16,20 @@
 
 package com.htecgroup.androidcore.presentation.compose.navigation
 
-import androidx.navigation.NavOptionsBuilder
-import com.htecgroup.androidcore.presentation.compose.navigation.Action.NavigationAction
-
 /**
- * Helps to build the navigation path using [Destination.name] and [args].
+ * Keys used in DynamicNavEntry.metadata to configure screen-level behaviors
+ * such as title, top bar actions, and navigation options.
  */
-abstract class ToDestination(
-    val destination: Destination,
-    val args: List<String>? = null,
-    val navOptions: NavOptionsBuilder.() -> Unit = {}
-) : NavigationAction
+object NavMetadataKeys {
+    /** Integer resource ID for the screen title */
+    const val SCREEN_TITLE = "screen_title"
 
-/**
- * Extension property for getting navigation path.
- * Returns destination [Destination.name] combined with [routeArgs].
- */
-val ToDestination.route: String
-    get() = destination.name + (
-        args?.let {
-            destination.routeArgs(it)
-        } ?: ""
-        )
+    /** Flag to indicate whether the top bar should show the back/up button */
+    const val SHOW_BACK_BUTTON = "show_back_button"
+
+    /** A [DeferredTopBarButton] to display as the contextual action on the top bar */
+    const val CONTEXT_BUTTON = "context_button"
+
+    /** Flag that controls bottom bar visibility for a navigation entry. */
+    const val SHOW_BOTTOM_BAR = "showBottomBar"
+}

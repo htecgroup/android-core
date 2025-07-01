@@ -16,37 +16,50 @@
 
 package com.htecgroup.coresample.presentation.post
 
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import com.htecgroup.androidcore.presentation.CoreActivity
-import com.htecgroup.androidcore.presentation.compose.composer.RouteComposer
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.htecgroup.androidcore.presentation.compose.CoreNavigableContent
+import com.htecgroup.androidcore.presentation.compose.navigation.persistance.NavPersistence
+import com.htecgroup.androidcore.presentation.model.BottomBarEntry
+import com.htecgroup.coresample.presentation.R
+import com.htecgroup.coresample.presentation.post.add.addPostEntry
+import com.htecgroup.coresample.presentation.post.list.postListEntry
 import com.htecgroup.coresample.presentation.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class PostsActivity : CoreActivity() {
+class PostsActivity : ComponentActivity() {
 
-    override val startDestination: String = PostsDestinations.POSTS_SCREEN.name
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val bottomTabs = listOf(
+                BottomBarEntry(
+                    label = stringResource(R.string.title_posts_list),
+                    icon = Icons.AutoMirrored.Filled.List,
+                    entry = postListEntry
+                ),
+                BottomBarEntry(
+                    label = stringResource(R.string.title_add_post),
+                    icon = Icons.Filled.Add,
+                    entry = addPostEntry
+                )
+            )
 
-    @Inject
-    lateinit var postsRoute: RouteComposer<PostsDestinations>
-
-    @Composable
-    override fun Theme(content: @Composable () -> Unit) = AppTheme(content = content)
-
-    override fun NavGraphBuilder.navGraph(navController: NavHostController) {
-        with(postsRoute) {
-            composeNavGraph(navController)
-        }
-    }
-
-    @Composable
-    override fun TopBar(snackbarHostState: SnackbarHostState, navController: NavHostController) {
-        with(postsRoute) {
-            ComposeTopBar(navController)
+            CoreNavigableContent(
+                modifier = Modifier.fillMaxSize(),
+                theme = { AppTheme(content = it) },
+                startNavEntry = postListEntry,
+                bottomTabs = bottomTabs,
+                persistence = NavPersistence(knownDestinations)
+            )
         }
     }
 }

@@ -16,7 +16,6 @@
 
 package com.htecgroup.coresample.presentation.post.single
 
-import androidx.lifecycle.SavedStateHandle
 import com.htecgroup.androidcore.test.CoreViewModelTest
 import com.htecgroup.coresample.domain.post.Post
 import com.htecgroup.coresample.domain.post.usecase.DeletePost
@@ -39,13 +38,13 @@ import org.junit.jupiter.api.Test
 internal class PostViewModelTest : CoreViewModelTest() {
 
     @MockK
-    lateinit var savedStateHandle: SavedStateHandle
-
-    @MockK
     lateinit var retrievePost: RetrievePost
 
     @MockK
     lateinit var deletePost: DeletePost
+
+    @MockK
+    lateinit var destination: PostDetailsDestination
 
     lateinit var sut: PostViewModel
 
@@ -54,11 +53,11 @@ internal class PostViewModelTest : CoreViewModelTest() {
     @BeforeEach
     internal fun setUp() {
         MockKAnnotations.init(this)
-        every { savedStateHandle.get<Int>(any()) } returns 1
         coEvery { retrievePost.invoke(1) } returns flowOf(
             Result.success(defaultPost)
         )
-        sut = PostViewModel(savedStateHandle, retrievePost, deletePost)
+        every { destination.id } returns 1
+        sut = PostViewModel(retrievePost, deletePost, destination)
     }
 
     @Test
