@@ -80,9 +80,9 @@ object Config {
 
     object Sample {
         const val applicationId = "com.htecgroup.coresample"
-        const val compileSdkVersion = 35
+        const val compileSdkVersion = 36
         const val minSdkVersion = 23
-        const val targetSdkVersion = 35
+        const val targetSdkVersion = 36
         const val versionCode = 1
         const val versionName = "1.0.0"
         const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
