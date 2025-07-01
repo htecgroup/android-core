@@ -21,7 +21,6 @@ import com.htecgroup.androidcore.test.CoreViewModelTest
 import com.htecgroup.coresample.domain.post.Post
 import com.htecgroup.coresample.domain.post.usecase.RetrievePost
 import com.htecgroup.coresample.domain.post.usecase.UpdatePost
-import com.htecgroup.coresample.domain.service.analytics.Analytics
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.confirmVerified
@@ -46,12 +45,11 @@ class EditPostViewModelTest : CoreViewModelTest() {
     private val retrievePost: RetrievePost = mockk()
     private val updatePost: UpdatePost = mockk()
     private val resources: Resources = mockk()
-    private val analytics: Analytics = mockk()
     private lateinit var viewModel: EditPostViewModel
 
     @BeforeEach
     fun setup() {
-        viewModel = EditPostViewModel(retrievePost, updatePost, resources, analytics)
+        viewModel = EditPostViewModel(retrievePost, updatePost, resources)
     }
 
     @Test

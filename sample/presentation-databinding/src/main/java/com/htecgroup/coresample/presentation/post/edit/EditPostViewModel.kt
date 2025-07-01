@@ -26,7 +26,6 @@ import com.htecgroup.androidcore.domain.extension.mapUnwrapResult
 import com.htecgroup.androidcore.presentation.viewmodel.State
 import com.htecgroup.coresample.domain.post.usecase.RetrievePost
 import com.htecgroup.coresample.domain.post.usecase.UpdatePost
-import com.htecgroup.coresample.domain.service.analytics.Analytics
 import com.htecgroup.coresample.presentation.R
 import com.htecgroup.coresample.presentation.base.BaseViewModel
 import com.htecgroup.coresample.presentation.post.PostView
@@ -41,7 +40,6 @@ class EditPostViewModel @Inject constructor(
     private val retrievePost: RetrievePost,
     private val updatePost: UpdatePost,
     private val resources: Resources,
-    private val analytics: Analytics
 ) : BaseViewModel<EditPostViewModel.EditPostActionCode>() {
 
     enum class EditPostActionCode {
