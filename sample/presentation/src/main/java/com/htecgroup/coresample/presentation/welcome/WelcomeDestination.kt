@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.di
+package com.htecgroup.coresample.presentation.welcome
 
-import android.app.Activity
-import com.htecgroup.coresample.presentation.MainActivity
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import com.htecgroup.androidcore.presentation.compose.navigation.persistance.PersistableNavDestination
+import com.htecgroup.androidcore.presentation.model.CoreNavEntry
 
-@Module
-@InstallIn(ActivityComponent::class)
-object ActivityBuilderModule {
-
-    @Provides
-    fun provideMainActivity(activity: Activity): MainActivity = activity as MainActivity
+object WelcomeDestination : PersistableNavDestination {
+    override val navKeyId: String = "welcome"
+    override fun createEntry(): CoreNavEntry = welcomeEntry
 }

@@ -28,8 +28,8 @@ import androidx.annotation.RequiresPermission
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.htecgroup.coresample.domain.service.NotificationController
+import com.htecgroup.coresample.presentation.MainActivity
 import com.htecgroup.coresample.presentation.R
-import com.htecgroup.coresample.presentation.post.PostsActivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -66,7 +66,7 @@ class NotificationControllerImpl @Inject constructor(
         description: String,
         channelId: String
     ): Notification {
-        val intent = Intent(context, PostsActivity::class.java).apply {
+        val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
