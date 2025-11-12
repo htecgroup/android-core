@@ -112,6 +112,11 @@ private fun Project.publication(
                                     name.set("Stefan Sentic")
                                     email.set("stefan.sentic@htecgroup.com")
                                 }
+                                developer {
+                                    id.set("aleksandravojinovic-htec")
+                                    name.set("Aleksandra Vojinovic")
+                                    email.set("aleksandra.vojinovic@htecgroup.com")
+                                }
                             }
 
                             scm {

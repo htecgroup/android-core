@@ -14,12 +14,6 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.post.list
+package com.htecgroup.coresample.presentation.post
 
-import com.htecgroup.androidcore.presentation.compose.navigation.ToDestination
-import com.htecgroup.coresample.presentation.post.PostsDestinations
-
-data class PostListRoutes(val id: Int) : ToDestination(
-    PostsDestinations.POST_DETAILS_SCREEN,
-    listOf(id.toString())
-)
+enum class SceneKey { Posts }

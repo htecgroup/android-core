@@ -16,7 +16,6 @@
 
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     dependencies {
@@ -55,12 +54,6 @@ apply(from = Config.Domain.publishingRoot)
 tasks.wrapper {
     gradleVersion = libs.versions.agp.get()
     distributionType = Wrapper.DistributionType.ALL
-}
-
-tasks.withType<KotlinCompile>().all {
-    kotlinOptions {
-        jvmTarget = Config.Bom.javaVersion.toString()
-    }
 }
 
 tasks.register("clean", Delete::class) {

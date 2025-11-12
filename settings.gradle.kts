@@ -27,6 +27,7 @@ pluginManagement {
         gradlePluginPortal()
         maven { setUrl("https://jitpack.io") }
         maven { setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
+        maven { setUrl("https://androidx.dev/snapshots/builds/13680953/artifacts/repository") }
 //        sonatypeSnapshot()
 //        jitpack()
         mavenLocal()
@@ -40,6 +41,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
         maven { setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/") }
+        maven { setUrl("https://androidx.dev/snapshots/builds/13680953/artifacts/repository") }
         //        sonatypeSnapshot()
         //        jitpack()
         mavenLocal()

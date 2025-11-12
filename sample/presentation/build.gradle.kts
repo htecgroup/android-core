@@ -22,6 +22,8 @@ plugins {
 	alias(libs.plugins.com.google.developers.ksp)
 	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.android.junit5)
+	alias(libs.plugins.compose.compiler)
+	alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 apply(from = Config.Sample.detekt)
@@ -75,8 +77,8 @@ dependencies {
 	implementation(libs.androidx.runtime)
 	implementation(libs.androidx.lifecycle.viewmodel.compose)
 	implementation(libs.androidx.hilt.navigation.compose)
-	implementation(libs.androidx.navigation.compose)
 	implementation(libs.androidx.activity.compose)
+	implementation(libs.androidx.material3.navigation3)
 
 	// Compose BOM
 	implementation(platform(libs.androidx.compose.bom))
@@ -84,6 +86,7 @@ dependencies {
 	implementation(libs.androidx.ui.tooling.preview)
 	implementation(libs.androidx.ui.tooling)
 	implementation(libs.androidx.material3)
+	implementation(libs.androidx.material.icons.extended)
 
 	// Hilt
 	implementation(libs.dagger.hilt)
@@ -92,6 +95,12 @@ dependencies {
 	implementation(libs.play.services.ads)
 
 	implementation(libs.androidx.work.runtime.ktx)
+
+	implementation(libs.nav3.runtime)
+	implementation(libs.nav3.ui)
+	implementation(libs.androidx.lifecycle.viewmodel.nav3)
+	implementation(libs.kotlinx.serialization.core)
+	implementation(libs.kotlinx.serialization.json)
 
 	// Test
 	testImplementation(project(Config.Test.moduleName))

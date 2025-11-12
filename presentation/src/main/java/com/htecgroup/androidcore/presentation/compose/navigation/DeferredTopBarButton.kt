@@ -16,11 +16,16 @@
 
 package com.htecgroup.androidcore.presentation.compose.navigation
 
-/**
- * Represents non-persistent actions which should be consumed only once,
- * such as showing a short lived message or navigating to a screen.
- */
-interface Action {
+import com.htecgroup.androidcore.presentation.compose.TopBarButton
 
-    interface NavigationAction : Action
-}
+/**
+ * A functional wrapper used to defer the creation of a top bar action button.
+ *
+ * Provides button configuration dynamically via metadata,
+ * and instantiates it only when rendering the current top bar.
+ *
+ * @property build Function that receives the [CoreNavBackStack] and returns a [TopBarButton] instance.
+ */
+class DeferredTopBarButton(
+    val build: (CoreNavBackStack) -> TopBarButton
+)

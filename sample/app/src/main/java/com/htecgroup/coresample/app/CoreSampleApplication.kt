@@ -54,7 +54,7 @@ class CoreSampleApplication : CoreApplication() {
     public override fun initViewModelId() {
         ViewModelIdProvider.viewModelId = BR.vm
     }
-    */
+     */
 
     companion object {
         lateinit var app: CoreSampleApplication

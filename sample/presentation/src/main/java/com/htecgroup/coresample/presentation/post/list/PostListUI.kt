@@ -19,6 +19,7 @@ package com.htecgroup.coresample.presentation.post.list
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,13 +29,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -64,30 +66,34 @@ private fun SwipeRefreshPostList(
     onClickItem: (PostView) -> Unit
 ) {
     val refreshState = rememberPullToRefreshState()
-    if (refreshState.isRefreshing) {
-        LaunchedEffect(true) {
-            onRefresh()
+    val isRefreshing by rememberUpdatedState(state.isLoading)
+
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
+        state = refreshState,
+        modifier = Modifier.fillMaxSize(),
+        indicator = {
+            PullToRefreshDefaults.Indicator(
+                state = refreshState,
+                isRefreshing = isRefreshing,
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
         }
-    }
-    if (!state.isLoading && refreshState.isRefreshing) {
-        refreshState.endRefresh()
-    }
-    state.data?.let { posts ->
-        Box(modifier = Modifier.nestedScroll(refreshState.nestedScrollConnection)) {
-            LazyColumn(state = rememberLazyListState()) {
-                itemsIndexed(items = posts) { index, item ->
-                    if (index > 0) {
-                        HorizontalDivider(
-                            thickness = dimensionResource(id = R.dimen.divider)
-                        )
+    ) {
+        state.data?.let { posts ->
+            Box(Modifier.fillMaxSize()) {
+                LazyColumn(state = rememberLazyListState()) {
+                    itemsIndexed(items = posts) { index, item ->
+                        if (index > 0) {
+                            HorizontalDivider(
+                                thickness = dimensionResource(id = R.dimen.divider)
+                            )
+                        }
+                        PostItem(item, onClickItem)
                     }
-                    PostItem(item, onClickItem)
                 }
             }
-            PullToRefreshContainer(
-                modifier = Modifier.align(Alignment.TopCenter),
-                state = refreshState
-            )
         }
     }
 }

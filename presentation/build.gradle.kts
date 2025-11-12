@@ -20,6 +20,8 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.com.google.developers.ksp)
     alias(libs.plugins.org.jetbrains.dokka)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     id("maven-publish")
 }
 
@@ -54,6 +56,10 @@ android {
 dependencies {
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.adaptive)
+    implementation(libs.androidx.material3.navigation3)
+    implementation(libs.androidx.material3.window.size.class1)
+    implementation(libs.androidx.material.icons.extended)
     ksp(libs.dagger.hilt.compiler)
 
     ksp(libs.androidx.compiler)
@@ -65,6 +71,12 @@ dependencies {
     // Compose BOM
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.material3)
+
+    implementation(libs.nav3.runtime)
+    implementation(libs.nav3.ui)
+    implementation(libs.androidx.lifecycle.viewmodel.nav3)
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
 
     dokkaHtmlPartialPlugin(libs.versioning.plugin)
 }

@@ -25,7 +25,8 @@ import javax.inject.Inject
  * Commented code is example of different approach
  *
  */
-class PostAdapter @Inject constructor() : /*BaseDiffAdapter<PostView>*/ CoreAdapter<PostView>() {
+class PostAdapter @Inject constructor() : CoreAdapter<PostView>() {
+    // BaseDiffAdapter<PostView>
 
     var listener: ((PostView) -> Unit)? = null
 

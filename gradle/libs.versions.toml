@@ -1,51 +1,59 @@
 [versions]
-agp = "8.6.1"
-appcompat = "1.6.1"
-compiler = "1.5.2"
-constraintlayout = "2.1.4"
+agp = "8.9.3"
+appcompat = "1.7.1"
+compiler = "1.5.15"
+constraintlayout = "2.2.1"
 converterMoshi = "2.9.0"
-coreKtxVersion = "1.5.0"
+coreKtxVersion = "1.6.1"
 coreTesting = "2.2.0"
 junitJupiter = "5.9.2"
 junitVintageEngine = "5.9.2"
 kluentAndroid = "1.72"
-kotlin = "1.9.0"
-coreKtx = "1.13.1"
-junit = "1.1.5"
-espresso = "3.5.1"
-kotlinxCoroutines = "1.7.3"
-activityCompose = "1.9.0"
-lifecycleViewmodelCompose = "2.8.2"
-daggerHilt = "2.49"
+kotlin = "2.1.0"
+coreKtx = "1.16.0"
+junit = "1.2.1"
+espresso = "3.6.1"
+kotlinxCoroutines = "1.10.2"
+activityCompose = "1.12.0-alpha03"
+lifecycleViewmodelCompose = "2.9.1"
+daggerHilt = "2.56.2"
 hiltNavigationCompose = "1.2.0"
 junit5 = "1.8.2.1"
 dokka = "1.8.10"
-detekt = "1.22.0"
+detekt = "1.23.8"
 gradleNexus = "1.3.0"
-googleServices = "4.4.2"
-firebaseAppDistribution = "5.0.0"
-firebaseCrashlytics = "3.0.2"
+googleServices = "4.4.3"
+firebaseAppDistribution = "5.1.1"
+firebaseCrashlytics = "3.0.4"
 moshiKotlinCodegen = "1.14.0"
 okhttp3 = "4.11.0"
 mockk = "1.13.4"
 moshiKotlin = "1.14.0"
 multidex = "2.0.1"
-navigationFragmentKtx = "2.7.7"
-navigationSafeArgsGradlePlugin = "2.7.7"
-playServicesAds = "23.1.0"
-recyclerview = "1.3.2"
-retrofit = "2.9.0"
-robolectric = "4.9.2"
-room = "2.6.1"
-runner = "1.5.2"
-runtime = "1.6.8"
+navigationFragmentKtx = "2.9.0"
+navigationSafeArgsGradlePlugin = "2.9.0"
+playServicesAds = "24.4.0"
+recyclerview = "1.4.0"
+retrofit = "2.11.0"
+robolectric = "4.14.1"
+room = "2.7.2"
+runner = "1.6.2"
+runtime = "1.8.3"
 swiperefreshlayout = "1.1.0"
 versioningPlugin = "1.8.10"
-firebaseBom = "33.1.1"
-workRuntimeKtx = "2.9.0"
-detektFormatting = "1.22.0"
-ksp = "1.9.0-1.0.12"
-composeBom = "2024.06.00"
+firebaseBom = "33.16.0"
+workRuntimeKtx = "2.10.2"
+detektFormatting = "1.23.8"
+ksp = "2.1.0-1.0.29"
+composeBom = "2025.06.01"
+nav3Core = "1.0.0-alpha04"
+nav3Lifecycle = "1.0.0-alpha02"
+kotlinSerialization = "2.1.21"
+kotlinxSerializationCore = "1.8.1"
+adaptive = "1.2.0-alpha07"
+material3WindowSizeClass = "1.4.0-alpha16"
+materialIconsExtended = "1.7.8"
+nav3Material = "1.0.0-SNAPSHOT"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -56,7 +64,6 @@ androidx-core-testing = { module = "androidx.arch.core:core-testing", version.re
 androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espresso" }
 androidx-junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junit" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
-androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationFragmentKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationFragmentKtx" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
@@ -96,13 +103,21 @@ androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-
+nav3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "nav3Core" }
+nav3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3Core" }
+androidx-lifecycle-viewmodel-nav3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "nav3Lifecycle" }
 versioning-plugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "versioningPlugin" }
 firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
 firebase-crashlytics-ktx = {group = "com.google.firebase", name = "firebase-crashlytics-ktx"}
 firebase-analytics-ktx = {group = "com.google.firebase", name = "firebase-analytics-ktx"}
 firebase-messaging-ktx = {group = "com.google.firebase", name = "firebase-messaging-ktx"}
 detekt-formatting = {group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detektFormatting"}
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationCore" }
+androidx-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "adaptive" }
+androidx-material3-window-size-class1 = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "material3WindowSizeClass" }
+androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended" }
+androidx-material3-navigation3 = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "nav3Material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -121,4 +136,6 @@ com-google-gms-google-services = {id = "com.google.gms.google-services", version
 com-google-firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution"}
 com-google-firebase-crashlytics = {id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics"}
 androidx-navigation-safeargs = {id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationSafeArgsGradlePlugin"}
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 
