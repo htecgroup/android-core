@@ -3,8 +3,12 @@ package versioning
 import Config
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
+import org.gradle.process.ExecOperations
+import javax.inject.Inject
 
-open class ResetPublishFlags : DefaultTask() {
+open class ResetPublishFlags @Inject constructor(
+    protected val execOps: ExecOperations
+) : DefaultTask() {
 
     @TaskAction
     fun execute() {
@@ -24,7 +28,7 @@ open class ResetPublishFlags : DefaultTask() {
     }
 
     protected fun commitResetPublishingFlags() {
-        project.exec {
+        execOps.exec {
             commandLine(
                 "sh",
                 "${project.rootDir}/buildSrc/src/main/kotlin/versioning/script/gitResetPublishingFlags.sh"
