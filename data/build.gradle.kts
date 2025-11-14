@@ -40,7 +40,7 @@ android {
     }
 
     publishing {
-        singleVariant("release") {}
+        singleVariant(Config.Data.release) {}
     }
 }
 

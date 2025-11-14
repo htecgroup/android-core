@@ -55,7 +55,7 @@ android {
     }
 
     publishing {
-        singleVariant("release") {}
+        singleVariant(Config.Presentation.release) {}
     }
 }
 

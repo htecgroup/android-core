@@ -45,7 +45,7 @@ android {
     }
 
     publishing {
-        singleVariant("release") {}
+        singleVariant(Config.PresentationDatabinding.release) {}
     }
 }
 
