@@ -24,16 +24,16 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class PostRaw(
 
-    @Json(name = "userId")
+    @field:Json(name = "userId")
     val userId: Int? = null,
 
-    @Json(name = "id")
+    @field:Json(name = "id")
     val id: Int,
 
-    @Json(name = "title")
+    @field:Json(name = "title")
     val title: String,
 
-    @Json(name = "body")
+    @field:Json(name = "body")
     val body: String
 )
 

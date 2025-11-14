@@ -22,15 +22,15 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 class UserRaw(
-    @Json(name = "id")
+    @field:Json(name = "id")
     val id: Int,
-    @Json(name = "name")
+    @field:Json(name = "name")
     val name: String?,
-    @Json(name = "username")
+    @field:Json(name = "username")
     val username: String?,
-    @Json(name = "email")
+    @field:Json(name = "email")
     val email: String?,
-    @Json(name = "phone")
+    @field:Json(name = "phone")
     val phone: String?
 )
 
