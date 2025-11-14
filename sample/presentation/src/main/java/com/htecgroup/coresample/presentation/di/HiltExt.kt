@@ -1,7 +1,7 @@
 package com.htecgroup.coresample.presentation.di
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 
 @Composable
