@@ -39,8 +39,13 @@ android {
         sourceCompatibility = Config.PresentationDatabinding.javaVersion
         targetCompatibility = Config.PresentationDatabinding.javaVersion
     }
+
     buildFeatures {
         dataBinding = true
+    }
+
+    publishing {
+        singleVariant("release") {}
     }
 }
 
@@ -53,7 +58,7 @@ dependencies {
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)
 
-    dokkaHtmlPartialPlugin(libs.versioning.plugin)
+    dokkaHtmlPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.PresentationDatabinding, android.sourceSets["main"].java.srcDirs)

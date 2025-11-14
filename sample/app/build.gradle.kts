@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -84,8 +87,10 @@ android {
         targetCompatibility = Config.Sample.javaVersion
     }
 
-    kotlinOptions {
-        jvmTarget = Config.Sample.javaVersion.toString()
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(Config.Sample.javaVersion.toString())
+        }
     }
 
     buildFeatures {
@@ -119,9 +124,13 @@ dependencies {
     implementation(libs.play.services.ads)
 
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.crashlytics.ktx)
-    implementation(libs.firebase.analytics.ktx)
-    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
 
     implementation(libs.androidx.work.runtime.ktx)
+
+    implementation(libs.okhttp3)
+
+    implementation(libs.androidx.material3.navigation3)
 }

@@ -36,6 +36,10 @@ android {
         sourceCompatibility = Config.Test.javaVersion
         targetCompatibility = Config.Test.javaVersion
     }
+
+    publishing {
+        singleVariant("release") {}
+    }
 }
 
 dependencies {
@@ -46,7 +50,7 @@ dependencies {
     api(libs.kotlinx.coroutines.test)
     api(libs.kluent.android)
 
-    dokkaHtmlPartialPlugin(libs.versioning.plugin)
+    dokkaHtmlPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.Test, android.sourceSets["main"].java.srcDirs)
