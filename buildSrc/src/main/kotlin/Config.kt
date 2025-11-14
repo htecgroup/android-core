@@ -20,7 +20,7 @@ import versioning.VersionProperties
 object Config {
 
     abstract class Core : MavenPublishingConfig {
-        val compileSdkVersion = 35
+        val compileSdkVersion = 36
         val minSdkVersion = 21
         val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val release = "release"
