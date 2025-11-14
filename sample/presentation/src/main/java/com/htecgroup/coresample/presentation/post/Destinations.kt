@@ -21,8 +21,10 @@ import com.htecgroup.coresample.presentation.post.add.AddPostDestination
 import com.htecgroup.coresample.presentation.post.edit.EditPostDestination
 import com.htecgroup.coresample.presentation.post.list.PostListDestination
 import com.htecgroup.coresample.presentation.post.single.PostDetailsDestination
+import com.htecgroup.coresample.presentation.welcome.WelcomeDestination
 
 val knownDestinations = mapOf<String, (Map<String, String>) -> PersistableNavDestination>(
+    WelcomeDestination.navKeyId to { WelcomeDestination },
     PostListDestination.navKeyId to { PostListDestination },
     AddPostDestination.navKeyId to { AddPostDestination },
     PostDetailsDestination.NAV_KEY_ID to PostDetailsDestination.Companion::fromParams,

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.post
+package com.htecgroup.coresample.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -28,14 +28,15 @@ import androidx.compose.ui.res.stringResource
 import com.htecgroup.androidcore.presentation.compose.CoreNavigableContent
 import com.htecgroup.androidcore.presentation.compose.navigation.persistance.NavPersistence
 import com.htecgroup.androidcore.presentation.model.BottomBarEntry
-import com.htecgroup.coresample.presentation.R
 import com.htecgroup.coresample.presentation.post.add.addPostEntry
+import com.htecgroup.coresample.presentation.post.knownDestinations
 import com.htecgroup.coresample.presentation.post.list.postListEntry
 import com.htecgroup.coresample.presentation.theme.AppTheme
+import com.htecgroup.coresample.presentation.welcome.welcomeEntry
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostsActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,7 @@ class PostsActivity : ComponentActivity() {
             CoreNavigableContent(
                 modifier = Modifier.fillMaxSize(),
                 theme = { AppTheme(content = it) },
-                startNavEntry = postListEntry,
+                startNavEntry = welcomeEntry,
                 bottomTabs = bottomTabs,
                 persistence = NavPersistence(knownDestinations)
             )

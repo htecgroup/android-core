@@ -16,7 +16,7 @@
 
 package com.htecgroup.coresample.presentation.post.add
 
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.htecgroup.androidcore.presentation.compose.navigation.combineMetadata
 import com.htecgroup.androidcore.presentation.compose.navigation.withBackButton
 import com.htecgroup.androidcore.presentation.compose.navigation.withTitle

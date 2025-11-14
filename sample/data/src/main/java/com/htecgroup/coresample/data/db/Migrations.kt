@@ -24,9 +24,9 @@ import com.htecgroup.coresample.data.db.entities.UserEntity
 object Migrations {
 
     val MIGRATION_1_2 = object : Migration(1, 2) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("ALTER TABLE ${PostEntity.TABLE_NAME} ADD COLUMN ${PostEntity.COLUMN_USER_ID} INTEGER")
-            database.execSQL(
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE ${PostEntity.TABLE_NAME} ADD COLUMN ${PostEntity.COLUMN_USER_ID} INTEGER")
+            db.execSQL(
                 """
                    CREATE TABLE IF NOT EXISTS ${UserEntity.TABLE_NAME}(
                    ${UserEntity.COLUMN_ID} INTEGER PRIMARY KEY NOT NULL,

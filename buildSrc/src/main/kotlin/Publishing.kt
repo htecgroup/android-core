@@ -21,7 +21,7 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.task
+import org.gradle.kotlin.dsl.register
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import java.io.File
@@ -81,14 +81,16 @@ private fun Project.publication(
                                         // for Android modules (AAR), Gradle will automatically
                                         // create sources jar files in maven repository
                                         artifact(
-                                            project.task<Jar>("androidSourcesJar") {
+                                            project.tasks.register(
+                                                "androidSourcesJar", Jar::class
+                                            ) {
                                                 archiveClassifier.set("sources")
                                                 from(sourceSet)
                                             }
                                         )
                                     }
                                     artifact(
-                                        project.task<Jar>("javadocJar") {
+                                        project.tasks.register("javadocJar", Jar::class) {
                                             archiveClassifier.set("javadoc")
                                             from(tasks.getByName("dokkaJavadoc").outputs)
                                         }
@@ -116,6 +118,11 @@ private fun Project.publication(
                                     id.set("aleksandravojinovic-htec")
                                     name.set("Aleksandra Vojinovic")
                                     email.set("aleksandra.vojinovic@htecgroup.com")
+                                }
+                                developer {
+                                    id.set("bobanst")
+                                    name.set("Boban Stajic")
+                                    email.set("boban.stajic@htecgroup.com")
                                 }
                             }
 

@@ -31,7 +31,7 @@
 		tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
 		<activity
-			android:name="com.htecgroup.coresample.presentation.post.PostsActivity"
+			android:name="com.htecgroup.coresample.presentation.MainActivity"
 			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

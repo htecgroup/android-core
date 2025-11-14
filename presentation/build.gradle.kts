@@ -43,13 +43,19 @@ android {
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compiler.get()
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+
+    publishing {
+        singleVariant(Config.Presentation.release) {}
     }
 }
 
@@ -78,7 +84,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.core)
     implementation(libs.kotlinx.serialization.json)
 
-    dokkaHtmlPartialPlugin(libs.versioning.plugin)
+    dokkaHtmlPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.Presentation, android.sourceSets["main"].java.srcDirs)

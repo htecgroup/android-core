@@ -38,6 +38,10 @@ android {
         sourceCompatibility = Config.Data.javaVersion
         targetCompatibility = Config.Data.javaVersion
     }
+
+    publishing {
+        singleVariant(Config.Data.release) {}
+    }
 }
 
 dependencies {
@@ -48,7 +52,7 @@ dependencies {
     api(libs.converter.moshi)
     api(libs.moshi.kotlin)
 
-    dokkaHtmlPartialPlugin(libs.versioning.plugin)
+    dokkaHtmlPlugin(libs.versioning.plugin)
 }
 
 configureReleasePublication(Config.Data, android.sourceSets["main"].java.srcDirs)

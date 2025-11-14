@@ -3,8 +3,12 @@ package versioning
 import Config.Core
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
+import org.gradle.process.ExecOperations
+import javax.inject.Inject
 
-abstract class BaseVersioningTask() : DefaultTask() {
+abstract class BaseVersioningTask @Inject constructor(
+    protected val execOps: ExecOperations
+) : DefaultTask() {
 
     @Input lateinit var module: Core
 
@@ -32,7 +36,7 @@ abstract class BaseVersioningTask() : DefaultTask() {
     protected fun commitModuleVersionChange() {
         val versionProperties = VersionProperties(module)
 
-        project.exec {
+        execOps.exec {
             commandLine(
                 "sh",
                 "${project.rootDir}/buildSrc/src/main/kotlin/versioning/script/gitModuleVersionUpdate.sh",
@@ -45,7 +49,7 @@ abstract class BaseVersioningTask() : DefaultTask() {
     protected fun commitBomVersionChange() {
         val versionProperties = VersionProperties(module)
 
-        project.exec {
+        execOps.exec {
             commandLine(
                 "sh",
                 "${project.rootDir}/buildSrc/src/main/kotlin/versioning/script/gitBomVersionUpdate.sh",

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 /*
  * Copyright 2023 HTEC Group Inc.
  *
@@ -47,9 +49,11 @@ android {
 		targetCompatibility = Config.Sample.javaVersion
 	}
 
-	kotlinOptions {
-		jvmTarget = Config.Sample.javaVersion.toString()
-	}
+	kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(Config.Sample.javaVersion.toString())
+        }
+    }
 
 	buildFeatures {
 		buildConfig = true
@@ -88,12 +92,13 @@ dependencies {
 	implementation(libs.androidx.room.ktx)
 
 	// Squareup
+    implementation(libs.okhttp3)
 	implementation(libs.logging.interceptor)
 
 	implementation(platform(libs.firebase.bom))
-	implementation(libs.firebase.crashlytics.ktx)
-	implementation(libs.firebase.analytics.ktx)
-	implementation(libs.firebase.messaging.ktx)
+	implementation(libs.firebase.crashlytics)
+	implementation(libs.firebase.analytics)
+	implementation(libs.firebase.messaging)
 
 	implementation(libs.androidx.work.runtime.ktx)
 
