@@ -15,7 +15,19 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/nav_graph_posts"
-	app:startDestination="@id/postsFragment">
+	app:startDestination="@id/welcomeFragment">
+
+	<fragment
+		android:id="@+id/welcomeFragment"
+		android:label="WelcomeFragment"
+		android:name="com.htecgroup.coresample.presentation.welcome.WelcomeFragment"
+		tools:layout="@layout/fragment_welcome">
+		<action
+			android:id="@+id/action_welcomeFragment_to_postsFragment"
+			app:destination="@id/postsFragment"
+			app:popUpTo="@id/welcomeFragment"
+			app:popUpToInclusive="true"/>
+	</fragment>
 
 	<fragment
 		android:id="@+id/postsFragment"

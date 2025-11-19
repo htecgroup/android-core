@@ -19,7 +19,7 @@
 
 		<variable
 			name="vm"
-			type="com.htecgroup.coresample.presentation.post.PostsMainViewModel" />
+			type="com.htecgroup.coresample.presentation.MainViewModel" />
 	</data>
 
 	<androidx.fragment.app.FragmentContainerView

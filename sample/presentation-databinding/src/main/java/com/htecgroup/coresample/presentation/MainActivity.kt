@@ -14,27 +14,27 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.post
+package com.htecgroup.coresample.presentation
 
 import android.os.Bundle
 import android.preference.PreferenceManager
 import com.htecgroup.coresample.domain.service.analytics.AnalyticConstants
 import com.htecgroup.coresample.domain.service.analytics.Analytics
-import com.htecgroup.coresample.presentation.R
 import com.htecgroup.coresample.presentation.base.BaseActivity
-import com.htecgroup.coresample.presentation.databinding.ActivityPostsBinding
+import com.htecgroup.coresample.presentation.databinding.ActivityMainBinding
+import com.htecgroup.coresample.presentation.welcome.WelcomeRoutes
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Random
 import javax.inject.Inject
 
 private const val KEY_PROGRAMMING_LANGUAGE = "preferred_programming_language"
 private const val PL_BOUND = 4
 
 @AndroidEntryPoint
-class PostsActivity : BaseActivity<ActivityPostsBinding, PostsMainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     @Inject
-    lateinit var navigation: PostsMainRoutes
+    lateinit var navigation: WelcomeRoutes
 
     // For concrete projects, best practice is to inject this only once in BaseActivity
     @Inject
@@ -46,9 +46,9 @@ class PostsActivity : BaseActivity<ActivityPostsBinding, PostsMainViewModel>() {
         setPreferredProgrammingLanguage()
     }
 
-    public override fun provideLayoutId() = R.layout.activity_posts
+    override fun provideLayoutId(): Int = R.layout.activity_main
 
-    public override fun provideViewModelClass() = PostsMainViewModel::class.java
+    override fun provideViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
 
     override fun onSupportNavigateUp(): Boolean = navigation.navController.navigateUp()
 

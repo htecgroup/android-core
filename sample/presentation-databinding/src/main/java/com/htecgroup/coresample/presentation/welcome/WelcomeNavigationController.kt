@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.post
+package com.htecgroup.coresample.presentation.welcome
 
+import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import com.htecgroup.androidcore.presentation.routes.NavigationController
@@ -23,11 +24,12 @@ import com.htecgroup.coresample.presentation.MainActivity
 import com.htecgroup.coresample.presentation.R
 import javax.inject.Inject
 
-class PostNavigationController @Inject constructor() : NavigationController {
+class WelcomeNavigationController @Inject constructor() : NavigationController {
+
     @Inject
     lateinit var activity: MainActivity
 
-    override val navController by lazy {
+    override val navController: NavController by lazy {
         val navHostFragment =
             activity.supportFragmentManager.findFragmentById(R.id.navHostFragmentMain) as NavHostFragment
         navHostFragment.navController
