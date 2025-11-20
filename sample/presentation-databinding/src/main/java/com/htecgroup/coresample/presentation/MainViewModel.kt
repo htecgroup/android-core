@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.di
+package com.htecgroup.coresample.presentation
 
-import android.app.Activity
-import com.htecgroup.coresample.presentation.MainActivity
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import com.htecgroup.coresample.presentation.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-@Module
-@InstallIn(ActivityComponent::class)
-object ActivityBuilderModule {
-
-    @Provides
-    fun provideMainActivity(activity: Activity): MainActivity = activity as MainActivity
-}
+@HiltViewModel
+class MainViewModel @Inject constructor() : BaseViewModel<Unit>()

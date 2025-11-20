@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 /*
  * Copyright 2023 HTEC Group Inc.
  *
@@ -44,9 +46,11 @@ android {
 		targetCompatibility = Config.Sample.javaVersion
 	}
 
-	kotlinOptions {
-		jvmTarget = Config.Sample.javaVersion.toString()
-	}
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.fromTarget(Config.Sample.javaVersion.toString())
+        }
+    }
 
 	testOptions {
 		unitTests.apply {
@@ -62,6 +66,7 @@ android {
 	composeOptions {
 		kotlinCompilerExtensionVersion = libs.versions.compiler.get()
 	}
+
 	packaging {
 		resources {
 			excludes += "/META-INF/{AL2.0,LGPL2.1}"

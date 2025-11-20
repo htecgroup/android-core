@@ -23,7 +23,7 @@ buildscript {
     }
 }
 dependencies {
-    dokkaHtmlMultiModulePlugin(libs.versioning.plugin)
+    dokkaHtmlPlugin(libs.versioning.plugin)
 }
 
 plugins {
@@ -56,9 +56,9 @@ tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.layout.buildDirectory)
-}
+//tasks.register("clean", Delete::class) {
+//    delete(rootProject.layout.buildDirectory)
+//}
 
 tasks.dokkaHtmlMultiModule {
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {

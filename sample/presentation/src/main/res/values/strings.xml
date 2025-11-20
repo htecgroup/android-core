@@ -29,6 +29,8 @@
 	<string name="no_description">No description</string>
 	<string name="no_body">No body</string>
 
+	<string name="enter_the_app">Enter the app</string>
+
 	<string name="title_posts_list">List of posts</string>
 	<string name="title_post_details">Post details</string>
 	<string name="title_add_post">Add post</string>

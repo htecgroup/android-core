@@ -22,7 +22,7 @@ import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.htecgroup.androidcore.presentation.compose.TopBarButton
 import com.htecgroup.androidcore.presentation.compose.navigation.DeferredTopBarButton
 import com.htecgroup.androidcore.presentation.compose.navigation.combineMetadata

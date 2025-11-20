@@ -14,11 +14,21 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.post
+package com.htecgroup.coresample.presentation.welcome
 
-import com.htecgroup.coresample.presentation.base.BaseViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.navigation.NavController
+import com.htecgroup.androidcore.presentation.routes.Routes
 import javax.inject.Inject
 
-@HiltViewModel
-class PostsMainViewModel @Inject constructor() : BaseViewModel<Unit>()
+class WelcomeRoutes @Inject constructor(
+    private val welcomeNavigationController: WelcomeNavigationController
+) : Routes {
+
+    override val navController: NavController by lazy { welcomeNavigationController.navController }
+
+    fun navigateToTheApp() {
+        welcomeNavigationController.navigate(
+            WelcomeFragmentDirections.actionWelcomeFragmentToPostsFragment()
+        )
+    }
+}

@@ -17,7 +17,7 @@
 package com.htecgroup.coresample.presentation.di
 
 import android.app.Activity
-import com.htecgroup.coresample.presentation.post.PostsActivity
+import com.htecgroup.coresample.presentation.MainActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,5 +28,5 @@ import dagger.hilt.android.components.ActivityComponent
 object ActivityBuilderModule {
 
     @Provides
-    fun providePostsActivity(activity: Activity): PostsActivity = activity as PostsActivity
+    fun provideMainActivity(activity: Activity): MainActivity = activity as MainActivity
 }

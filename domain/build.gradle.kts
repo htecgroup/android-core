@@ -31,7 +31,7 @@ java {
 dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
-    dokkaHtmlPartialPlugin(libs.versioning.plugin)
+    dokkaHtmlPlugin(libs.versioning.plugin)
 }
 
 configureJavaPublication(Config.Domain, sourceSets["main"].java.srcDirs)

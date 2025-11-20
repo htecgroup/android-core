@@ -28,6 +28,8 @@ import com.htecgroup.coresample.presentation.post.list.PostsFragment
 import com.htecgroup.coresample.presentation.post.list.PostsRoutes
 import com.htecgroup.coresample.presentation.post.single.PostDetailsFragment
 import com.htecgroup.coresample.presentation.post.single.PostDetailsRoutes
+import com.htecgroup.coresample.presentation.welcome.WelcomeFragment
+import com.htecgroup.coresample.presentation.welcome.WelcomeRoutes
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -60,4 +62,9 @@ abstract class PostsRoutesNavigationProvider {
     @IntoMap
     @RouteKey(EditPostFragment::class)
     internal abstract fun bindEditPostRoutes(route: EditPostRoutes): Routes
+
+    @Binds
+    @IntoMap
+    @RouteKey(WelcomeFragment::class)
+    internal abstract fun bindWelcomeRoutes(route: WelcomeRoutes): Routes
 }

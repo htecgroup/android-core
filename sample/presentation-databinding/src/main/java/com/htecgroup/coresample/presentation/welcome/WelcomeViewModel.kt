@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package com.htecgroup.coresample.presentation.post
+package com.htecgroup.coresample.presentation.welcome
 
-import com.htecgroup.androidcore.presentation.routes.Routes
+import com.htecgroup.coresample.presentation.R
+import com.htecgroup.coresample.presentation.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class PostsMainRoutes @Inject constructor(
-    private val postNavigationController: PostNavigationController
-) : Routes {
-    override val navController by lazy { postNavigationController.navController }
+@HiltViewModel
+class WelcomeViewModel @Inject constructor() : BaseViewModel<WelcomeViewModel.WelcomeActionCode>() {
+
+    enum class WelcomeActionCode {
+        CLICK_ENTER_THE_APP
+    }
+
+    fun onEnterTheAppClick() {
+        setAction(WelcomeActionCode.CLICK_ENTER_THE_APP, R.string.enter_the_app)
+    }
 }
