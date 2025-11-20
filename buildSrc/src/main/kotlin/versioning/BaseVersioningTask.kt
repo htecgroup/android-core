@@ -2,15 +2,28 @@ package versioning
 
 import Config.Core
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-abstract class BaseVersioningTask @Inject constructor(
-    protected val execOps: ExecOperations
-) : DefaultTask() {
+abstract class BaseVersioningTask : DefaultTask() {
+
+    @get:Inject
+    abstract val execOps: ExecOperations
+
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val rootDirectory: DirectoryProperty
 
     @Input lateinit var module: Core
+
+    init {
+        rootDirectory.set(project.rootProject.layout.projectDirectory)
+    }
 
     protected fun bumpPatchVersion() {
         VersionProperties(module)
@@ -39,7 +52,7 @@ abstract class BaseVersioningTask @Inject constructor(
         execOps.exec {
             commandLine(
                 "sh",
-                "${project.rootDir}/buildSrc/src/main/kotlin/versioning/script/gitModuleVersionUpdate.sh",
+                "${rootDirectory.asFile.get()}/buildSrc/src/main/kotlin/versioning/script/gitModuleVersionUpdate.sh",
                 module.artifactId,
                 versionProperties.version.substringBefore('-')
             )
@@ -52,7 +65,7 @@ abstract class BaseVersioningTask @Inject constructor(
         execOps.exec {
             commandLine(
                 "sh",
-                "${project.rootDir}/buildSrc/src/main/kotlin/versioning/script/gitBomVersionUpdate.sh",
+                "${rootDirectory.asFile.get()}/buildSrc/src/main/kotlin/versioning/script/gitBomVersionUpdate.sh",
                 versionProperties.version.substringBefore('-')
             )
         }
