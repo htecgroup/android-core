@@ -2,13 +2,25 @@ package versioning
 
 import Config
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-open class ResetPublishFlags @Inject constructor(
+abstract class ResetPublishFlags @Inject constructor(
     protected val execOps: ExecOperations
 ) : DefaultTask() {
+
+    @get:InputDirectory
+    @get:PathSensitive(PathSensitivity.RELATIVE)
+    abstract val rootDirectory: DirectoryProperty
+
+    init {
+        rootDirectory.set(project.rootProject.layout.projectDirectory)
+    }
 
     @TaskAction
     fun execute() {
@@ -31,7 +43,7 @@ open class ResetPublishFlags @Inject constructor(
         execOps.exec {
             commandLine(
                 "sh",
-                "${project.rootDir}/buildSrc/src/main/kotlin/versioning/script/gitResetPublishingFlags.sh"
+                "${rootDirectory.asFile.get()}/buildSrc/src/main/kotlin/versioning/script/gitResetPublishingFlags.sh"
             )
         }
     }

@@ -13,7 +13,7 @@ We have [bill of materials (BOM)][bom] available to help you keep Android Core a
 ```kotlin
     dependencies {
        // define BOM and its version
-       implementation(platform("com.htecgroup.androidcore:bom:1.0.2"))
+       implementation(platform("com.htecgroup.androidcore:bom:2.0.0"))
 
        // define any required Android Core artifacts without version
        implementation("com.htecgroup.androidcore:domain")
