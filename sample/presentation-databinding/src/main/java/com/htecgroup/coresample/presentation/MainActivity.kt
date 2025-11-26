@@ -18,6 +18,7 @@ package com.htecgroup.coresample.presentation
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import androidx.navigation.fragment.NavHostFragment
 import com.htecgroup.coresample.domain.service.analytics.AnalyticConstants
 import com.htecgroup.coresample.domain.service.analytics.Analytics
 import com.htecgroup.coresample.presentation.base.BaseActivity
@@ -42,6 +43,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragmentMain) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.setGraph(R.navigation.nav_graph_posts)
 
         setPreferredProgrammingLanguage()
     }
