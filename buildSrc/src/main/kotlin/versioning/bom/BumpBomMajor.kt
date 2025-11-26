@@ -4,9 +4,7 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-open class BumpBomMajor @Inject constructor(
-    execOps: ExecOperations
-) : BaseVersioningTask(execOps) {
+abstract class BumpBomMajor : BaseVersioningTask() {
 
     @TaskAction
     fun execute() {
