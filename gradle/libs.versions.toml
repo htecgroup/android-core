@@ -31,7 +31,6 @@ mockk = "1.14.6"
 moshiKotlin = "1.15.2"
 multidex = "2.0.1"
 navigationFragmentKtx = "2.9.6"
-navigationSafeArgsGradlePlugin = "2.9.6"
 playServicesAds = "24.7.0"
 recyclerview = "1.4.0"
 retrofit = "3.0.0"
@@ -136,7 +135,7 @@ gradle-nexus-publish-plugin = {id = "io.github.gradle-nexus.publish-plugin", ver
 com-google-gms-google-services = {id = "com.google.gms.google-services", version.ref = "googleServices"}
 com-google-firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppDistribution"}
 com-google-firebase-crashlytics = {id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics"}
-androidx-navigation-safeargs = {id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationSafeArgsGradlePlugin"}
+androidx-navigation-safeargs = {id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationFragmentKtx"}
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 
